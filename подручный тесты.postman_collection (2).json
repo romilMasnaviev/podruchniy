@@ -1,0 +1,1034 @@
+{
+	"info": {
+		"_postman_id": "daffc506-5a0c-4fc1-907c-6f5405fdeac7",
+		"name": "подручный тесты",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30103054"
+	},
+	"item": [
+		{
+			"name": "users Copy",
+			"item": [
+				{
+					"name": "User 1 create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {",
+									"    pm.response.to.have.status(200); // Проверяем статус-код ответа",
+									"});",
+									"",
+									"pm.test(\"Response is in JSON format\", function () {",
+									"    pm.response.to.be.json; // Проверяем, что ответ в формате JSON",
+									"});",
+									"",
+									"pm.test(\"Test 'id' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('id'); // Проверяем наличие поля 'id'",
+									"    pm.expect(jsonData.id).to.eql(1); // Проверяем, что значение поля 'id' равно 1",
+									"});",
+									"",
+									"pm.test(\"Test 'email' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('email'); // Проверяем наличие поля 'email'",
+									"    pm.expect(jsonData.email).to.eql('user@user.com'); // Проверяем, что значение поля 'email' соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test 'username' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('username'); // Проверяем наличие поля 'username'",
+									"    pm.expect(jsonData.username).to.eql('testname'); // Проверяем, что значение поля 'username' соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test 'mobileNumber' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('mobileNumber'); // Проверяем наличие поля 'mobileNumber'",
+									"    pm.expect(jsonData.mobileNumber).to.eql('8999999999'); // Проверяем, что значение поля 'mobileNumber' соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test 'password' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('password'); // Проверяем наличие поля 'password'",
+									"    pm.expect(jsonData.password).to.eql('testpassword'); // Проверяем, что значение поля 'password' соответствует ожидаемому",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"8999999999\",\n    \"email\": \"user@user.com\",\n    \"username\": \"testname\",\n    \"password\": \"testpassword\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User 2 create fail duplicate email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([409, 500]);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"9999999999\",\n    \"email\": \"user@user.com\",\n    \"username\": \"testname1\",\n    \"password\": \"testpassword2\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User create fail no email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500]);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"8999999999\",\n    \"username\": \"testname\",\n    \"password\": \"testpassword\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User create fail invalid email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500]);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"8999999999\",\n    \"email\": \"user.com\",\n    \"username\": \"testname\",\n    \"password\": \"testpassword\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User 1 update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200); // Проверяем статус-код ответа",
+									"});",
+									"",
+									"pm.test(\"Response is in JSON format\", function () {",
+									"    pm.response.to.be.json; // Проверяем, что ответ в формате JSON",
+									"});",
+									"",
+									"pm.test(\"Test 'id' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('id'); // Проверяем наличие поля 'id'",
+									"    pm.expect(jsonData.id).to.eql(1); // Проверяем, что значение поля 'id' равно 1",
+									"});",
+									"",
+									"pm.test(\"Test 'email' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('email'); // Проверяем наличие поля 'email'",
+									"    pm.expect(jsonData.email).to.eql('update@user.com'); // Проверяем, что значение поля 'email' соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test 'username' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('username'); // Проверяем наличие поля 'username'",
+									"    pm.expect(jsonData.username).to.eql('testname'); // Проверяем, что значение поля 'username' соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test 'mobileNumber' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('mobileNumber'); // Проверяем наличие поля 'mobileNumber'",
+									"    pm.expect(jsonData.mobileNumber).to.eql('8999999999'); // Проверяем, что значение поля 'mobileNumber' соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test 'password' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('password'); // Проверяем наличие поля 'password'",
+									"    pm.expect(jsonData.password).to.eql('testpassword'); // Проверяем, что значение поля 'password' соответствует ожидаемому",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"update\",\n    \"email\": \"update@user.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User 5 create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200); // Проверяем статус-код ответа",
+									"});",
+									"",
+									"pm.test(\"Response is in JSON format\", function () {",
+									"    pm.response.to.be.json; // Проверяем, что ответ в формате JSON",
+									"});",
+									"",
+									"pm.test(\"Test 'id' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('id'); // Проверяем наличие поля 'id'",
+									"    pm.expect(jsonData.id).to.eql(5); // Проверяем, что значение поля 'id' равно 5",
+									"});",
+									"",
+									"pm.test(\"Test 'email' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('email'); // Проверяем наличие поля 'email'",
+									"    pm.expect(jsonData.email).to.eql('user3@user.com'); // Проверяем, что значение поля 'email' соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test 'username' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('username'); // Проверяем наличие поля 'username'",
+									"    pm.expect(jsonData.username).to.eql('testname3'); // Проверяем, что значение поля 'username' соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test 'mobileNumber' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('mobileNumber'); // Проверяем наличие поля 'mobileNumber'",
+									"    pm.expect(jsonData.mobileNumber).to.eql('8999999912'); // Проверяем, что значение поля 'mobileNumber' соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test 'password' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('password'); // Проверяем наличие поля 'password'",
+									"    pm.expect(jsonData.password).to.eql('testpassword3'); // Проверяем, что значение поля 'password' соответствует ожидаемому",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"8999999912\",\n    \"email\": \"user3@user.com\",\n    \"username\": \"testname3\",\n    \"password\": \"testpassword3\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User 1 update name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200); // Проверяем статус-код ответа",
+									"});",
+									"",
+									"pm.test(\"Response is in JSON format\", function () {",
+									"    pm.response.to.be.json; // Проверяем, что ответ в формате JSON",
+									"});",
+									"",
+									"pm.test(\"Test 'id' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('id'); // Проверяем наличие поля 'id'",
+									"    pm.expect(jsonData.id).to.eql(1); // Проверяем, что значение поля 'id' равно 1",
+									"});",
+									"",
+									"pm.test(\"Test 'email' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('email'); // Проверяем наличие поля 'email'",
+									"    pm.expect(jsonData.email).to.eql('update@user.com'); // Проверяем, что значение поля 'email' соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test 'username' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('username'); // Проверяем наличие поля 'username'",
+									"    pm.expect(jsonData.username).to.eql('updateName'); // Проверяем, что значение поля 'username' соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test 'mobileNumber' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('mobileNumber'); // Проверяем наличие поля 'mobileNumber'",
+									"    pm.expect(jsonData.mobileNumber).to.eql('8999999999'); // Проверяем, что значение поля 'mobileNumber' соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test 'password' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('password'); // Проверяем наличие поля 'password'",
+									"    pm.expect(jsonData.password).to.eql('testpassword'); // Проверяем, что значение поля 'password' соответствует ожидаемому",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"updateName\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User 1 update email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Has user update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test user 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test user 'email' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('email');",
+									"    pm.expect(jsonData.email, '\"email\" must be \"updateName@user.com\"').to.eql('updateName@user.com');",
+									"});",
+									"pm.test(\"Test 'username' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('username'); // Проверяем наличие поля 'username'",
+									"    pm.expect(jsonData.username).to.eql('updateName'); // Проверяем, что значение поля 'username' соответствует ожидаемому",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"updateName@user.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User 1 update with same email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Has user update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test user 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test user 'email' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('email');",
+									"    pm.expect(jsonData.email, '\"email\" must be \"updateName@user.com\"').to.eql('updateName@user.com');",
+									"});",
+									"pm.test(\"Test 'username' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('username'); // Проверяем наличие поля 'username'",
+									"    pm.expect(jsonData.username).to.eql('updateName'); // Проверяем, что значение поля 'username' соответствует ожидаемому",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"updateName@user.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User 1 get updated",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Has user update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test user 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);",
+									"});",
+									"pm.test(\"Test user 'email' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('email');",
+									"    pm.expect(jsonData.email, '\"email\" must be \"updateName@user.com\"').to.eql('updateName@user.com');",
+									"});",
+									"pm.test(\"Test 'username' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('username'); // Проверяем наличие поля 'username'",
+									"    pm.expect(jsonData.username).to.eql('updateName'); // Проверяем, что значение поля 'username' соответствует ожидаемому",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User 5 get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"pm.test(\"Has user update response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test user 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 5').to.eql(5);",
+									"});",
+									"pm.test(\"Test user 'email' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('email');",
+									"    pm.expect(jsonData.email, '\"email\" must be \"user3@user.com\"').to.eql('user3@user.com');",
+									"});",
+									"pm.test(\"Test 'username' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('username'); // Проверяем наличие поля 'username'",
+									"    pm.expect(jsonData.username).to.eql('testname3'); // Проверяем, что значение поля 'username' соответствует ожидаемому",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User 100 get unkonwn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([500]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User 3 delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/:userId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User 6 create after delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"pm.test(\"Has user create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test user 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 6').to.eql(6);",
+									"});",
+									"pm.test(\"Test user 'email' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('email');",
+									"    pm.expect(jsonData.email, '\"email\" must be \"user3@user.com\"').to.eql('user3@user.com');",
+									"});",
+									"pm.test(\"Test 'username' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData).to.have.property('username'); // Проверяем наличие поля 'username'",
+									"    pm.expect(jsonData.username).to.eql('testname3'); // Проверяем, что значение поля 'username' соответствует ожидаемому",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobileNumber\": \"8999999912\",\n    \"email\": \"user3@user.com\",\n    \"username\": \"testname3\",\n    \"password\": \"testpassword3\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User get all",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200); // Проверяем статус-код ответа",
+									"});",
+									"",
+									"pm.test(\"Response is in JSON format\", function () {",
+									"    pm.response.to.be.json; // Проверяем, что ответ в формате JSON",
+									"});",
+									"",
+									"pm.test(\"Test list user response\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData.length, 'List length must be 2').to.eql(2); // Проверяем, что длина списка пользователей равна 2",
+									"});",
+									"",
+									"pm.test(\"Test user[0] 'id' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData[0]).to.have.property('id'); // Проверяем наличие поля 'id' у первого пользователя",
+									"    pm.expect(jsonData[0].id).to.eql(1); // Проверяем, что значение поля 'id' у первого пользователя равно 1",
+									"});",
+									"",
+									"pm.test(\"Test user[0] 'email' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData[0]).to.have.property('email'); // Проверяем наличие поля 'email' у первого пользователя",
+									"    pm.expect(jsonData[0].email).to.eql('updateName@user.com'); // Проверяем, что значение поля 'email' у первого пользователя соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test user[0] 'username' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData[0]).to.have.property('username'); // Проверяем наличие поля 'username' у первого пользователя",
+									"    pm.expect(jsonData[0].username).to.eql('updateName'); // Проверяем, что значение поля 'username' у первого пользователя соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test user[1] 'id' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData[1]).to.have.property('id'); // Проверяем наличие поля 'id' у второго пользователя",
+									"    pm.expect(jsonData[1].id).to.eql(6); // Проверяем, что значение поля 'id' у второго пользователя равно 6",
+									"});",
+									"",
+									"pm.test(\"Test user[1] 'email' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData[1]).to.have.property('email'); // Проверяем наличие поля 'email' у второго пользователя",
+									"    pm.expect(jsonData[1].email).to.eql('user3@user.com'); // Проверяем, что значение поля 'email' у второго пользователя соответствует ожидаемому",
+									"});",
+									"",
+									"pm.test(\"Test user[1] 'username' field\", function () {",
+									"    var jsonData = pm.response.json(); // Получаем JSON-данные из ответа",
+									"    pm.expect(jsonData[1]).to.have.property('username'); // Проверяем наличие поля 'username' у второго пользователя",
+									"    pm.expect(jsonData[1].username).to.eql('testname3'); // Проверяем, что значение поля 'username' у второго пользователя соответствует ожидаемому",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
