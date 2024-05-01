@@ -998,6 +998,204 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "User 2 create fail duplicate email Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([409, 500]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"user\",\n    \"email\": \"user@user.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "restaurant criteria tests",
+			"item": [
+				{
+					"name": "Restaurant get criteries id 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});",
+									"",
+									"pm.test(\"Response has body\", function () {",
+									"    pm.response.to.be.withBody;",
+									"});",
+									"",
+									"pm.test(\"Response is JSON\", function () {",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Check if the response contains the expected restaurant data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an('array').that.is.not.empty;",
+									"    ",
+									"    // Проверка для каждого ресторана в массиве",
+									"    jsonData.forEach(function(restaurant) {",
+									"        pm.expect(restaurant).to.have.property('id');",
+									"        pm.expect(restaurant.id).to.be.a('number');",
+									"",
+									"        pm.expect(restaurant).to.have.property('name');",
+									"        pm.expect(restaurant.name).to.be.a('string');",
+									"",
+									"        pm.expect(restaurant).to.have.property('rating');",
+									"        pm.expect(restaurant.rating).to.be.a('number');",
+									"",
+									"        pm.expect(restaurant).to.have.property('reviews');",
+									"        pm.expect(restaurant.reviews).to.be.an('array');",
+									"",
+									"        pm.expect(restaurant).to.have.property('cuisineType');",
+									"        pm.expect(restaurant.cuisineType).to.be.oneOf(['CHINESE', 'ITALIAN', 'MEXICAN', 'INDIAN']); // Проверка на возможные значения",
+									"",
+									"        pm.expect(restaurant).to.have.property('priceRange');",
+									"        pm.expect(restaurant.priceRange).to.be.oneOf(['CHEAP', 'MODERATE', 'EXPENSIVE']); // Проверка на возможные значения",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"user\",\n    \"email\": \"user.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/restaurants/byCriteriaNumbers?criteriaNumbers=1,2,3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurants",
+								"byCriteriaNumbers"
+							],
+							"query": [
+								{
+									"key": "criteriaNumbers",
+									"value": "1,2,3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restaurant get criteries empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400]);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"user\",\n    \"email\": \"user.com\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/restaurants/byCriteriaNumbers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"restaurants",
+								"byCriteriaNumbers"
+							],
+							"query": [
+								{
+									"key": "criteriaNumbers",
+									"value": "1,2,3",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
