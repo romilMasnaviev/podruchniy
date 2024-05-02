@@ -27,6 +27,11 @@ public class UserController {
         return userService.findById(userId);
     }
 
+    @PatchMapping("/{userId}")
+    User update(@PathVariable Long userId,@RequestBody User user){
+        return userService.update(user,userId);
+    }
+
     @DeleteMapping
     public void remove(Long userId) {
         userService.remove(userId);

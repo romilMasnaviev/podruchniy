@@ -6,8 +6,8 @@ import ru.xorochki.resSearch.model.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-01T12:09:58+0300",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.8.1 (Amazon.com Inc.)"
+    date = "2024-05-02T15:45:00+0300",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class UserConverterImpl implements UserConverter {

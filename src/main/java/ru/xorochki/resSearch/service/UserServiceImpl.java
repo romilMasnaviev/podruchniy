@@ -27,6 +27,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User update(User user, Long userId) {
+        user.setId(userId);
+        if (!repository.existsById(userId)) {
+            throw new ValidationException("Restaurant doesn't exist");
+        }
+        return repository.save(user);
+    }
+
+    @Override
     public User findById(Long userId) {
         Optional<User> userOptional = repository.findById(userId);
         if (userOptional.isEmpty()) {

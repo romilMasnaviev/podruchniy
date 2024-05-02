@@ -8,4 +8,6 @@ public interface ReviewService {
     Review findById(Long reviewId);
 
     void remove(Long reviewId);
+
+    Review update(Review review, Long reviewId);
 }

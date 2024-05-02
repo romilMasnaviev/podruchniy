@@ -2,8 +2,8 @@ package ru.xorochki.resSearch.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.xorochki.resSearch.dao.JpaReviewRepository;
 import ru.xorochki.resSearch.dao.JpaRestaurantRepository;
+import ru.xorochki.resSearch.dao.JpaReviewRepository;
 import ru.xorochki.resSearch.model.Criteria;
 import ru.xorochki.resSearch.model.Restaurant;
 import ru.xorochki.resSearch.model.Review;
@@ -67,5 +67,14 @@ public class ReviewServiceImpl implements ReviewService {
             throw new ValidationException("Review not found");
         }
         reviewRepository.deleteById(reviewId);
+    }
+
+    @Override
+    public Review update(Review review, Long reviewId) {
+        review.setId(reviewId);
+        if (!reviewRepository.existsById(reviewId)) {
+            throw new ValidationException("Restaurant doesn't exist");
+        }
+        return reviewRepository.save(review);
     }
 }
