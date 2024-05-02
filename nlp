@@ -1,0 +1,44 @@
+import nltk
+import string
+
+# Функция для удаления знаков препинания из предложения
+def remove_punctuation(sentence):
+    return sentence.translate(str.maketrans('', '', string.punctuation))
+
+# Функция для нахождения наибольшего общего префикса двух строк
+def longest_common_prefix(str1, str2):
+    i = 0
+    while i < min(len(str1), len(str2)) and str1[i] == str2[i]:
+        i += 1
+    return str1[:i]
+
+# Функция для нахождения корня слова
+def get_root(word):
+    # В данной версии мы используем простой метод получения первой части слова
+    return word[:3] if len(word) > 3 else word
+
+# Функция для нахождения слов с одинаковыми корнями в предложении
+def find_words_with_same_root(sentence):
+    sentence = remove_punctuation(sentence)  # Удаление знаков препинания
+    words = nltk.word_tokenize(sentence.lower())  # Токенизация предложения
+    word_dict = {}
+
+    # Составление словаря, где ключ - корень слова, значение - список слов с этим корнем
+    for i, word in enumerate(words):
+        root = get_root(word)
+        if root not in word_dict:
+            word_dict[root] = [word]
+        else:
+            word_dict[root].append(word)
+
+    # Фильтрация списка слов с одинаковыми корнями
+    filtered_words = [value for key, value in word_dict.items() if len(value) > 1]
+    return filtered_words
+
+
+sentence = "Темнота. Очень темный зал. Одним словом темно. Освещение плохое. Добавьте свет. Хочу светло"
+words_with_same_root = find_words_with_same_root(sentence)
+print("Слова с одинаковыми корнями:")
+for words in words_with_same_root:
+    print(words)
+
