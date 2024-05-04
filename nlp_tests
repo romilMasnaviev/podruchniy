@@ -1,0 +1,57 @@
+# Тесты
+def test_find_words_with_same_root():
+    # Basic test cases
+    sentences = [
+        "освещение свет",
+        "кот собака стол",
+        "голубь голубка голубятня"
+    ]
+    expected_output = [
+        [],
+        [],
+        [['голубь', 'голубка', 'голубятня']]
+    ]
+    for i, sentence in enumerate(sentences):
+        assert find_words_with_same_root(sentence) == expected_output[i], f"Expected: {expected_output[i]}, but got: {find_words_with_same_root(sentence)}"
+
+    # Test cases with punctuation
+    sentences = [
+        "освещение, свет!",
+        "кот, собака, стол!",
+        "голубь, голубка, голубятня!"
+    ]
+    expected_output = [
+        [],
+        [],
+        [['голубь', 'голубка', 'голубятня']]
+    ]
+    for i, sentence in enumerate(sentences):
+        assert find_words_with_same_root(sentence) == expected_output[i], f"Expected: {expected_output[i]}, but got: {find_words_with_same_root(sentence)}"
+
+    # Case insensitive test cases
+    sentences = [
+        "ОсВеЩеНиЕ СвЕт",
+        "КоТ СоБаКа СтОл",
+        "ГоЛуБь ГоЛуБкА ГоЛуБяТнЯ"
+    ]
+    expected_output = [
+        [],
+        [],
+        [['голубь', 'голубка', 'голубятня']]
+    ]
+    for i, sentence in enumerate(sentences):
+        assert find_words_with_same_root(sentence) == expected_output[i], f"Expected: {expected_output[i]}, but got: {find_words_with_same_root(sentence)}"
+
+    # Test cases with multiple sentences
+    sentences = [
+        "освещение свет. кот собака стол.",
+        "голубь голубка голубятня! тест тестирование тестер."
+    ]
+    expected_output = [
+        [],
+        [['голубь', 'голубка', 'голубятня'], ['тест', 'тестирование', 'тестер']]
+    ]
+    for i, sentence in enumerate(sentences):
+        assert find_words_with_same_root(sentence) == expected_output[i], f"Expected: {expected_output[i]}, but got: {find_words_with_same_root(sentence)}"
+
+    print("All tests passed!")
