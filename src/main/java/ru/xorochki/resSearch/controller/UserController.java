@@ -51,17 +51,6 @@ public class UserController {
         return "restaurant_added_to_favorites";
     }
 
-
-    @GetMapping
-    public List<UserResponse> getAll() {
-        return userService.getAll();
-    }
-
-    @GetMapping("/{userId}")
-    public UserResponse get(@PathVariable Long userId) {
-        return userService.get(userId);
-    }
-
     @PatchMapping("/{userId}")
     public UserResponse update(@PathVariable Long userId, @RequestBody UserUpdateRequest user) {
         return userService.update(user, userId);
