@@ -51,13 +51,4 @@ public class UserController {
         return "restaurant_added_to_favorites";
     }
 
-    @PatchMapping("/{userId}")
-    public UserResponse update(@PathVariable Long userId, @RequestBody UserUpdateRequest user) {
-        return userService.update(user, userId);
-    }
-
-    @DeleteMapping("/{userId}")
-    public void remove(@PathVariable Long userId) {
-        userService.remove(userId);
-    }
 }
