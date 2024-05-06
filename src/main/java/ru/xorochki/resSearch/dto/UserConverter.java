@@ -10,7 +10,7 @@ public interface UserConverter {
 
     User UserRequestConvertToUser(UserRequest userRequest);
 
-    UserGetResponse UserConvertToUserGetResponse(User user);
+    UserResponse UserConvertToUserGetResponse(User user);
 
-    List<UserGetResponse> UserConvertToUserGetResponse(List<User> users);
+    List<UserResponse> UserConvertToUserGetResponse(List<User> users);
 }

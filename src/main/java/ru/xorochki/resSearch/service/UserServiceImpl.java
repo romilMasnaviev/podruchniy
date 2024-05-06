@@ -4,14 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaUserRepository;
 import ru.xorochki.resSearch.dto.UserConverter;
-import ru.xorochki.resSearch.dto.UserGetResponse;
 import ru.xorochki.resSearch.dto.UserRequest;
-import ru.xorochki.resSearch.model.Restaurant;
+import ru.xorochki.resSearch.dto.UserResponse;
+import ru.xorochki.resSearch.dto.UserUpdateRequest;
 import ru.xorochki.resSearch.model.User;
 
 import javax.validation.ValidationException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,26 +28,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User user, Long userId) {
-        user.setId(userId);
-        if (!repository.existsById(userId)) {
-            throw new ValidationException("Restaurant doesn't exist");
-        }
-        return repository.save(user);
+    public UserResponse update(UserUpdateRequest userUpdateDto, Long userId) {
+        User existingUser = repository.findById(userId)
+                .orElseThrow(() -> new ValidationException("User doesn't exist"));
+
+        User updatedUser = updateUserFields(userUpdateDto, existingUser);
+
+        return converter.UserConvertToUserGetResponse(repository.save(updatedUser));
     }
 
     @Override
-    public List<UserGetResponse> getAll() {
+    public List<UserResponse> getAll() {
         return converter.UserConvertToUserGetResponse(repository.findAll());
     }
 
     @Override
-    public User findById(Long userId) {
-        Optional<User> userOptional = repository.findById(userId);
-        if (userOptional.isEmpty()) {
-            throw new ValidationException("User doesn't exist");
-        }
-        return userOptional.get();
+    public UserResponse get(Long userId) {
+        return converter.UserConvertToUserGetResponse(repository.findById(userId).orElseThrow());
     }
 
     @Override
@@ -59,5 +55,21 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             throw new RuntimeException("Failed to create user: " + e.getMessage());
         }
+    }
+
+    private User updateUserFields(UserUpdateRequest userUpdateDto, User user) {
+        if (userUpdateDto.getUsername() != null) {
+            user.setUsername(userUpdateDto.getUsername());
+        }
+        if (userUpdateDto.getMobileNumber() != null) {
+            user.setMobileNumber(userUpdateDto.getMobileNumber());
+        }
+        if (userUpdateDto.getEmail() != null) {
+            user.setEmail(userUpdateDto.getEmail());
+        }
+        if (userUpdateDto.getPassword() != null) {
+            user.setPassword(userUpdateDto.getPassword());
+        }
+        return user;
     }
 }

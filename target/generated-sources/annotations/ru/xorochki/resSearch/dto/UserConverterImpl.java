@@ -8,7 +8,7 @@ import ru.xorochki.resSearch.model.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-06T11:17:57+0300",
+    date = "2024-05-06T14:26:30+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -31,29 +31,29 @@ public class UserConverterImpl implements UserConverter {
     }
 
     @Override
-    public UserGetResponse UserConvertToUserGetResponse(User user) {
+    public UserResponse UserConvertToUserGetResponse(User user) {
         if ( user == null ) {
             return null;
         }
 
-        UserGetResponse userGetResponse = new UserGetResponse();
+        UserResponse userResponse = new UserResponse();
 
-        userGetResponse.setId( user.getId() );
-        userGetResponse.setUsername( user.getUsername() );
-        userGetResponse.setMobileNumber( user.getMobileNumber() );
-        userGetResponse.setEmail( user.getEmail() );
-        userGetResponse.setPassword( user.getPassword() );
+        userResponse.setId( user.getId() );
+        userResponse.setUsername( user.getUsername() );
+        userResponse.setMobileNumber( user.getMobileNumber() );
+        userResponse.setEmail( user.getEmail() );
+        userResponse.setPassword( user.getPassword() );
 
-        return userGetResponse;
+        return userResponse;
     }
 
     @Override
-    public List<UserGetResponse> UserConvertToUserGetResponse(List<User> users) {
+    public List<UserResponse> UserConvertToUserGetResponse(List<User> users) {
         if ( users == null ) {
             return null;
         }
 
-        List<UserGetResponse> list = new ArrayList<UserGetResponse>( users.size() );
+        List<UserResponse> list = new ArrayList<UserResponse>( users.size() );
         for ( User user : users ) {
             list.add( UserConvertToUserGetResponse( user ) );
         }
