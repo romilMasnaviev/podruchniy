@@ -7,10 +7,8 @@ import ru.xorochki.resSearch.model.Criteria;
 import ru.xorochki.resSearch.model.Restaurant;
 
 import javax.validation.ValidationException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,26 +51,39 @@ public class RestaurantServiceImpl implements RestaurantService {
         return repository.save(restaurant);
     }
 
-    @Override // метод для поиска похожих рестаранов по критериям
+    @Override
     public List<Restaurant> getSameRestaurant(Long restaurantId) {
-        List<Restaurant> restaurants = repository.findAll(); // выгружаем все рестораны
-
-        // достаем критерии выбранного ресторана чтобы найти наиболее похожие
+        List<Restaurant> restaurants = repository.findAll();
         List<Criteria> criterias = repository.getReferenceById(restaurantId).getCriteria();
-
-        //создаем мапу где ключ это количество совпадающих параметров, а значение - ресторан
-        HashMap<Long, Restaurant> mostSameRestaurants = new HashMap<>();
-
+        TreeMap<Long, List<Restaurant>> sortedRestaurants = new TreeMap<>(Collections.reverseOrder());
         for (Restaurant restaurant : restaurants) {
-            mostSameRestaurants.put(getCountSameCriteria(criterias,restaurant.getCriteria()),restaurant);
+            Long countSameCriteria = getCountSameCriteria(criterias, restaurant.getCriteria());
+            sortedRestaurants.computeIfAbsent(countSameCriteria, k -> new ArrayList<>()).add(restaurant);
         }
-
-        //TODO добавить сортировку
-        return null;
+        return sortedRestaurants.values().stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 
-    // метод возвращает количество одинаковых критериев
-    private Long getCountSameCriteria(List<Criteria> firstCriteriaList, List<Criteria> secondCriteriaList){
-        return null;
+    @Override
+    public List<Restaurant> findByCriteriaNumbers(List<Long> criteriaNumbers) {
+        List<Restaurant> allRestaurants = repository.findAll();
+        List<Restaurant> matchingRestaurants = new ArrayList<>();
+        for (Restaurant restaurant : allRestaurants) {
+            List<Criteria> restaurantCriteria = restaurant.getCriteria();
+
+            if (restaurantCriteria.stream().map(Criteria::getId).collect(Collectors.toSet()).containsAll(criteriaNumbers)) {
+                matchingRestaurants.add(restaurant);
+            }
+        }
+        return matchingRestaurants;
+    }
+
+    private Long getCountSameCriteria(List<Criteria> firstCriteriaList, List<Criteria> secondCriteriaList) {
+        Set<Criteria> firstCriteriaSet = new HashSet<>(firstCriteriaList);
+        Set<Criteria> secondCriteriaSet = new HashSet<>(secondCriteriaList);
+        Set<Criteria> intersection = new HashSet<>(firstCriteriaSet);
+        intersection.retainAll(secondCriteriaSet);
+        return (long) intersection.size();
     }
 }

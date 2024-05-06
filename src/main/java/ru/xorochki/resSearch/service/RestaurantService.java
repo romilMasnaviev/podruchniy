@@ -14,4 +14,6 @@ public interface RestaurantService {
     Restaurant update(Restaurant restaurant, Long restaurantId);
 
     List<Restaurant> getSameRestaurant(Long restaurantId);
+
+    List<Restaurant> findByCriteriaNumbers(List<Long> criteriaNumbers);
 }

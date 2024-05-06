@@ -38,4 +38,9 @@ public class RestaurantController {
     public List<Restaurant> getSameRestaurant(@PathVariable Long restaurantId) {
         return service.getSameRestaurant(restaurantId);
     }
+
+    @GetMapping("/byCriteriaNumbers")
+    public List<Restaurant> getByCriteriaNumbers(@RequestParam List<Long> criteriaNumbers) {
+        return service.findByCriteriaNumbers(criteriaNumbers);
+    }
 }
