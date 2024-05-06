@@ -14,7 +14,7 @@ public class UserRequest {
     @Size(min = 1, max = 50, message = "Username must be between 1 and 50 characters")
     private String username;
 
-    @Pattern(regexp = "(^$|[0-9]{10})", message = "Invalid mobile number")
+    @Pattern(regexp = "(^$|[0-9]{11})", message = "Invalid mobile number")
     private String mobileNumber;
 
     @Email(message = "Invalid email address")

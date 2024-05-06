@@ -40,4 +40,6 @@ public class RestaurantController {
     List<Restaurant> getSameRestaurant(@PathVariable Long restaurantId){
         return service.getSameRestaurant(restaurantId);
     }
+
+
 }

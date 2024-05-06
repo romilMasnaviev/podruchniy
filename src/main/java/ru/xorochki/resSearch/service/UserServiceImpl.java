@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaUserRepository;
 import ru.xorochki.resSearch.dto.UserConverter;
+import ru.xorochki.resSearch.dto.UserGetResponse;
 import ru.xorochki.resSearch.dto.UserRequest;
 import ru.xorochki.resSearch.model.Restaurant;
 import ru.xorochki.resSearch.model.User;
 
 import javax.validation.ValidationException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,6 +35,11 @@ public class UserServiceImpl implements UserService {
             throw new ValidationException("Restaurant doesn't exist");
         }
         return repository.save(user);
+    }
+
+    @Override
+    public List<UserGetResponse> getAll() {
+        return converter.UserConvertToUserGetResponse(repository.findAll());
     }
 
     @Override

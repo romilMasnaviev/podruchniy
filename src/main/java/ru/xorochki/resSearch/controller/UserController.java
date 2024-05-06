@@ -1,16 +1,15 @@
 package ru.xorochki.resSearch.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import ru.xorochki.resSearch.dto.UserGetResponse;
 import ru.xorochki.resSearch.dto.UserRequest;
-import ru.xorochki.resSearch.model.Restaurant;
-import ru.xorochki.resSearch.model.Review;
 import ru.xorochki.resSearch.model.User;
 import ru.xorochki.resSearch.service.UserService;
-import ru.xorochki.resSearch.service.UserServiceImpl;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
@@ -18,22 +17,22 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    User create(UserRequest request) {
+    public User create(@RequestBody UserRequest request) {
         return userService.create(request);
     }
 
     @GetMapping
-    User get(@RequestParam Long userId){
-        return userService.findById(userId);
+    public List<UserGetResponse> get() {
+        return userService.getAll();
     }
 
     @PatchMapping("/{userId}")
-    User update(@PathVariable Long userId,@RequestBody User user){
-        return userService.update(user,userId);
+    public User update(@PathVariable Long userId, @RequestBody User user) {
+        return userService.update(user, userId);
     }
 
-    @DeleteMapping
-    public void remove(Long userId) {
+    @DeleteMapping("/{userId}")
+    public void remove(@PathVariable Long userId) {
         userService.remove(userId);
     }
 }
