@@ -3,10 +3,7 @@ package ru.xorochki.resSearch.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaUserRepository;
-import ru.xorochki.resSearch.dto.UserConverter;
-import ru.xorochki.resSearch.dto.UserRequest;
-import ru.xorochki.resSearch.dto.UserResponse;
-import ru.xorochki.resSearch.dto.UserUpdateRequest;
+import ru.xorochki.resSearch.dto.*;
 import ru.xorochki.resSearch.model.User;
 
 import javax.validation.ValidationException;
@@ -45,6 +42,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse get(Long userId) {
         return converter.UserConvertToUserGetResponse(repository.findById(userId).orElseThrow());
+    }
+
+    @Override
+    public void checkUserExist(LoginRequest loginRequest) {
+        if (!repository.existsByUsernameAndPassword(loginRequest.getUsername(), loginRequest.getPassword())) {
+            throw new ValidationException("Не существует такого пользователя");
+        }
     }
 
     @Override

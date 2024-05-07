@@ -1,5 +1,6 @@
 package ru.xorochki.resSearch.service;
 
+import ru.xorochki.resSearch.dto.LoginRequest;
 import ru.xorochki.resSearch.dto.UserRequest;
 import ru.xorochki.resSearch.dto.UserResponse;
 import ru.xorochki.resSearch.dto.UserUpdateRequest;
@@ -18,4 +19,6 @@ public interface UserService {
     List<UserResponse> getAll();
 
     UserResponse get(Long userId);
+
+    void checkUserExist(LoginRequest loginRequest);
 }
