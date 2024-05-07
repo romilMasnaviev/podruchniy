@@ -1,5 +1,6 @@
 package ru.xorochki.resSearch.service;
 
+import ru.xorochki.resSearch.dto.RestaurantResponse;
 import ru.xorochki.resSearch.model.Restaurant;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface RestaurantService {
 
     List<Restaurant> getSameRestaurant(Long restaurantId);
 
-    List<Restaurant> findByCriteriaNumbers(List<Long> criteriaNumbers);
+    List<RestaurantResponse> findByCriteriaNumbers(List<Long> criteriaNumbers);
 }

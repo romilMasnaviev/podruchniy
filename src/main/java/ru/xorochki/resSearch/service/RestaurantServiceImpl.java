@@ -3,6 +3,8 @@ package ru.xorochki.resSearch.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaRestaurantRepository;
+import ru.xorochki.resSearch.dto.RestaurantConverter;
+import ru.xorochki.resSearch.dto.RestaurantResponse;
 import ru.xorochki.resSearch.model.Criteria;
 import ru.xorochki.resSearch.model.Restaurant;
 
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 public class RestaurantServiceImpl implements RestaurantService {
 
     private final JpaRestaurantRepository repository;
+    private final RestaurantConverter converter;
 
     @Override
     public Restaurant create(Restaurant restaurant) {
@@ -66,7 +69,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<Restaurant> findByCriteriaNumbers(List<Long> criteriaNumbers) {
+    public List<RestaurantResponse> findByCriteriaNumbers(List<Long> criteriaNumbers) {
         List<Restaurant> allRestaurants = repository.findAll();
         List<Restaurant> matchingRestaurants = new ArrayList<>();
         for (Restaurant restaurant : allRestaurants) {
@@ -76,7 +79,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                 matchingRestaurants.add(restaurant);
             }
         }
-        return matchingRestaurants;
+        return converter.restaurantConvertToRestaurantResponses(matchingRestaurants);
     }
 
     private Long getCountSameCriteria(List<Criteria> firstCriteriaList, List<Criteria> secondCriteriaList) {

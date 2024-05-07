@@ -2,6 +2,7 @@ package ru.xorochki.resSearch.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ru.xorochki.resSearch.dto.RestaurantResponse;
 import ru.xorochki.resSearch.model.Restaurant;
 import ru.xorochki.resSearch.service.RestaurantService;
 
@@ -40,7 +41,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/byCriteriaNumbers")
-    public List<Restaurant> getByCriteriaNumbers(@RequestParam List<Long> criteriaNumbers) {
+    public List<RestaurantResponse> getByCriteriaNumbers(@RequestParam List<Long> criteriaNumbers) {
         return service.findByCriteriaNumbers(criteriaNumbers);
     }
 }
