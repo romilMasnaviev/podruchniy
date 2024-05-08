@@ -1,4 +1,4 @@
-package ru.xorochki.resSearch.security;
+package ru.xorochki.resSearch.securingweb;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,11 +6,11 @@ import ru.xorochki.resSearch.model.User;
 
 import java.util.Collection;
 
-public class UserDetailsMy implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
 
     private final User user;
 
-    public UserDetailsMy(User user) {
+    public UserDetailsImpl(User user) {
         this.user = user;
     }
 
@@ -21,12 +21,12 @@ public class UserDetailsMy implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.user.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.user.getUsername();
+        return user.getUsername();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class UserDetailsMy implements UserDetails {
         return true;
     }
 
-    public User getUser() {
+    public User getUser(){
         return this.user;
     }
 }
