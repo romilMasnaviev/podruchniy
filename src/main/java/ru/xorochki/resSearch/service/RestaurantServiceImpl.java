@@ -7,8 +7,7 @@ import ru.xorochki.resSearch.dto.RestaurantConverter;
 import ru.xorochki.resSearch.dto.RestaurantResponse;
 import ru.xorochki.resSearch.model.Criteria;
 import ru.xorochki.resSearch.model.Restaurant;
-
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 import java.util.*;
 import java.util.stream.Collectors;
 

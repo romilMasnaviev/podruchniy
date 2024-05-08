@@ -110,8 +110,8 @@ VALUES (3, 1),  -- Парковка
        (3, 12), -- Организация бизнес-ланча
        (3, 13); -- Поддержка различных языков для туристов
 
--- INSERT INTO users (mobile_number, username, email, password)
--- VALUES ('1234567890', 'user1', 'user1@example.com', 'password1'),
+ INSERT INTO users (mobile_number, username, email, password)
+ VALUES ('1234567890', 'test', 'test@gmail.com', 'testtesttest');
 --        ('0987654321', 'user2', 'user2@example.com', 'password2'),
 --        ('5555555555', 'user3', 'user3@example.com', 'password3');
 

@@ -1,5 +1,6 @@
 package ru.xorochki.resSearch.service;
 
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaRestaurantRepository;
@@ -8,7 +9,7 @@ import ru.xorochki.resSearch.model.Criteria;
 import ru.xorochki.resSearch.model.Restaurant;
 import ru.xorochki.resSearch.model.Review;
 
-import javax.validation.ValidationException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

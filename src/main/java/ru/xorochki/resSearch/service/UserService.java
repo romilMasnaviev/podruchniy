@@ -21,4 +21,6 @@ public interface UserService {
     UserResponse get(Long userId);
 
     void checkUserExist(LoginRequest loginRequest);
+
+    
 }

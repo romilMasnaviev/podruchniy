@@ -6,7 +6,7 @@ import ru.xorochki.resSearch.dao.JpaUserRepository;
 import ru.xorochki.resSearch.dto.*;
 import ru.xorochki.resSearch.model.User;
 
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 import java.util.List;
 
 @Service

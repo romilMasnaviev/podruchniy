@@ -1,10 +1,9 @@
 package ru.xorochki.resSearch.controller;
-
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.xorochki.resSearch.dto.LoginRequest;
 import ru.xorochki.resSearch.dto.UserRequest;
@@ -12,13 +11,12 @@ import ru.xorochki.resSearch.dto.UserResponse;
 import ru.xorochki.resSearch.dto.UserUpdateRequest;
 import ru.xorochki.resSearch.service.UserService;
 
-import javax.validation.Valid;
+
 import java.util.List;
 
 @Controller
 @RequestMapping("/users")
 @RequiredArgsConstructor
-@Validated
 public class UserController {
 
     private final UserService userService;
