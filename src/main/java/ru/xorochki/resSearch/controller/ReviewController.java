@@ -1,11 +1,16 @@
 package ru.xorochki.resSearch.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.xorochki.resSearch.dto.ReviewResponse;
 import ru.xorochki.resSearch.model.Review;
 import ru.xorochki.resSearch.service.ReviewService;
 
-@RestController
+import java.util.List;
+
+@Controller
 @RequestMapping("/reviews")
 @RequiredArgsConstructor
 public class ReviewController {
@@ -25,6 +30,13 @@ public class ReviewController {
     @PatchMapping("/{reviewId}")
     public Review update(@PathVariable Long reviewId, @RequestBody Review review) {
         return service.update(review, reviewId);
+    }
+
+    @GetMapping("/{userId}/reviews")
+    public String getUserReviews(@PathVariable Long userId, Model model) {
+        List<ReviewResponse> reviews = service.findReviewsByUserId(userId);
+        model.addAttribute("reviews", reviews);
+        return "user_reviews";
     }
 
     @DeleteMapping("/{reviewId}")

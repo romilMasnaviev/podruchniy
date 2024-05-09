@@ -5,12 +5,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaRestaurantRepository;
 import ru.xorochki.resSearch.dao.JpaReviewRepository;
+import ru.xorochki.resSearch.dto.ReviewConverter;
+import ru.xorochki.resSearch.dto.ReviewResponse;
 import ru.xorochki.resSearch.model.Criteria;
 import ru.xorochki.resSearch.model.Restaurant;
 import ru.xorochki.resSearch.model.Review;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -19,6 +22,7 @@ import java.util.Optional;
 public class ReviewServiceImpl implements ReviewService {
     private final JpaReviewRepository reviewRepository;
     private final JpaRestaurantRepository restaurantRepository;
+    private final ReviewConverter converter;
 
     @Override
     public Review create(Review review) {
@@ -77,5 +81,10 @@ public class ReviewServiceImpl implements ReviewService {
             throw new ValidationException("Restaurant doesn't exist");
         }
         return reviewRepository.save(review);
+    }
+
+    @Override
+    public List<ReviewResponse> findReviewsByUserId(Long userId) {
+        return converter.reviewConvertToReviewResponse(reviewRepository.findByOwner_Id(userId));
     }
 }

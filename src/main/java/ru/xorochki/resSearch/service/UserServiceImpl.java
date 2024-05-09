@@ -76,4 +76,25 @@ public class UserServiceImpl implements UserService {
         }
         return user;
     }
+
+    public Long getUserIdByUsername(String username) {
+        // Ваша логика для получения идентификатора пользователя по имени пользователя
+        User user = repository.findByUsername(username).orElseThrow();
+        return user.getId();
+    }
+
+    public UserResponse getUserById(Long userId) {
+        User user = repository.findById(userId).orElse(null);
+        if (user != null) {
+            UserResponse userResponse = new UserResponse();
+            userResponse.setId(user.getId());
+            userResponse.setUsername(user.getUsername());
+            userResponse.setMobileNumber(user.getMobileNumber());
+            userResponse.setEmail(user.getEmail());
+            userResponse.setPassword(user.getPassword());
+            return userResponse;
+        } else {
+            return null;
+        }
+    }
 }

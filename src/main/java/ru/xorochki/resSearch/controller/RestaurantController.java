@@ -1,6 +1,7 @@
 package ru.xorochki.resSearch.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.xorochki.resSearch.dto.RestaurantResponse;
 import ru.xorochki.resSearch.model.Restaurant;
@@ -8,7 +9,7 @@ import ru.xorochki.resSearch.service.RestaurantService;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/restaurants")
 @RequiredArgsConstructor
 public class RestaurantController {

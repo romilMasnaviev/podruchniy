@@ -22,12 +22,13 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/home", "/home/compilations").permitAll()
+                        .requestMatchers("/", "/home", "/compilations").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
+                        .defaultSuccessUrl("/home")
                 )
                 .logout(LogoutConfigurer::permitAll)
                 .userDetailsService(userDetailsService());
