@@ -8,7 +8,7 @@ import ru.xorochki.resSearch.model.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-09T20:11:34+0300",
+    date = "2024-05-09T21:39:39+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component

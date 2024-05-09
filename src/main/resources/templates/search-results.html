@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant List</title>
+</head>
+<body>
+<h1>Restaurant List</h1>
+<ul>
+    <li th:each="restaurant : ${restaurants}">
+        <span th:text="${restaurant.name}"></span>
+        <span th:text="${restaurant.rating}"></span>
+        <span th:text="${restaurant.cuisineType}"></span>
+        <span th:text="${restaurant.priceRange}"></span>
+    </li>
+</ul>
+<a href="/home">Вернуться на домашнюю страницу</a>
+</body>
+</html>

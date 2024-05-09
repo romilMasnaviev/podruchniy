@@ -81,6 +81,11 @@ public class RestaurantServiceImpl implements RestaurantService {
         return converter.restaurantConvertToRestaurantResponses(matchingRestaurants);
     }
 
+    @Override
+    public List<Restaurant> findByAllCriteria(List<Criteria> criteria) {
+        return repository.findByAllCriteria(criteria, criteria.size());
+    }
+
     private Long getCountSameCriteria(List<Criteria> firstCriteriaList, List<Criteria> secondCriteriaList) {
         Set<Criteria> firstCriteriaSet = new HashSet<>(firstCriteriaList);
         Set<Criteria> secondCriteriaSet = new HashSet<>(secondCriteriaList);

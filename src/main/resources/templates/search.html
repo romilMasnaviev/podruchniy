@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Criteria</title>
+</head>
+<body>
+<h1>Search Criteria</h1>
+<form action="/criteria/selected" method="get">
+  <ul>
+    <li th:each="criteria : ${criteriaList}">
+      <label>
+        <input type="checkbox" name="selectedCriteria" th:value="${criteria.id}"/>
+        <span th:text="${criteria.name}"></span>
+      </label>
+    </li>
+  </ul>
+  <button type="submit">Search</button>
+</form>
+<a href="/home">Вернуться на домашнюю страницу</a>
+</body>
+</html>

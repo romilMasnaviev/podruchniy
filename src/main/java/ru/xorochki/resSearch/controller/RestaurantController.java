@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.xorochki.resSearch.dto.RestaurantResponse;
 import ru.xorochki.resSearch.model.Restaurant;
+import ru.xorochki.resSearch.service.CriteriaService;
 import ru.xorochki.resSearch.service.RestaurantService;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class RestaurantController {
 
     private final RestaurantService service;
+    private final CriteriaService criteriaService;
 
     @PostMapping
     public Restaurant create(@RequestBody Restaurant restaurant) {

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favorite Restaurants</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    p {
+      color: #666;
+    }
+
+    a {
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .restaurant {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px;
+      width: 50%;
+      text-align: left;
+    }
+
+    .restaurant-name {
+      font-weight: bold;
+    }
+
+    .restaurant-rating {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+<h1>Favorite Restaurants</h1>
+<div th:if="${favoriteRestaurants != null and not #lists.isEmpty(favoriteRestaurants)}">
+  <div th:each="restaurant : ${favoriteRestaurants}" class="restaurant">
+    <p class="restaurant-name" th:text="${restaurant.name}"></p>
+    <p class="restaurant-rating">Rating: <span th:text="${restaurant.rating}"></span></p>
+    <p>Cuisine Type: <span th:text="${restaurant.cuisineType}"></span></p>
+    <p>Price Range: <span th:text="${restaurant.priceRange}"></span></p>
+    <!-- You can add more details here if needed -->
+  </div>
+</div>
+<div th:if="${favoriteRestaurants == null or #lists.isEmpty(favoriteRestaurants)}">
+  <p>No favorite restaurants found.</p>
+</div>
+<a href="/home" class="back-btn">Back to Home</a>
+</body>
+</html>
