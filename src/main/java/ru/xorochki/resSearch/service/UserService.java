@@ -1,9 +1,6 @@
 package ru.xorochki.resSearch.service;
 
-import ru.xorochki.resSearch.dto.LoginRequest;
-import ru.xorochki.resSearch.dto.UserRequest;
-import ru.xorochki.resSearch.dto.UserResponse;
-import ru.xorochki.resSearch.dto.UserUpdateRequest;
+import ru.xorochki.resSearch.dto.*;
 import ru.xorochki.resSearch.model.User;
 
 import java.util.List;
@@ -26,4 +23,6 @@ public interface UserService {
     Long getUserIdByUsername(String username);
 
     UserResponse getUserById(Long userId);
+
+    List<RestaurantResponse> getUserFavorites(Long userId);
 }

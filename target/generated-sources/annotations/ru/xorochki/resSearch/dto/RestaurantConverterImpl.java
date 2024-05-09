@@ -9,32 +9,11 @@ import ru.xorochki.resSearch.model.Review;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-09T20:11:34+0300",
+    date = "2024-05-09T21:16:21+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
 public class RestaurantConverterImpl implements RestaurantConverter {
-
-    @Override
-    public RestaurantResponse restaurantConvertToRestaurantResponses(RestaurantResponse responses) {
-        if ( responses == null ) {
-            return null;
-        }
-
-        RestaurantResponse restaurantResponse = new RestaurantResponse();
-
-        restaurantResponse.setId( responses.getId() );
-        restaurantResponse.setName( responses.getName() );
-        restaurantResponse.setRating( responses.getRating() );
-        List<Review> list = responses.getReviews();
-        if ( list != null ) {
-            restaurantResponse.setReviews( new ArrayList<Review>( list ) );
-        }
-        restaurantResponse.setCuisineType( responses.getCuisineType() );
-        restaurantResponse.setPriceRange( responses.getPriceRange() );
-
-        return restaurantResponse;
-    }
 
     @Override
     public List<RestaurantResponse> restaurantConvertToRestaurantResponses(List<Restaurant> matchingRestaurants) {

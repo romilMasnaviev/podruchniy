@@ -9,7 +9,5 @@ import java.util.List;
 
 public interface RestaurantConverter {
 
-    RestaurantResponse restaurantConvertToRestaurantResponses(RestaurantResponse responses);
-
     List<RestaurantResponse> restaurantConvertToRestaurantResponses(List<Restaurant> matchingRestaurants);
 }

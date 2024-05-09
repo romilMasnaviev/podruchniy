@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS user_favorites;
 DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS restaurants_criteria;
 DROP TABLE IF EXISTS users;
@@ -45,6 +46,12 @@ CREATE TABLE IF NOT EXISTS reviews
     criteria_id   BIGINT REFERENCES criteria (id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS user_favorites
+(
+    user_id       BIGINT REFERENCES users (id) ON DELETE CASCADE,
+    restaurant_id BIGINT REFERENCES restaurants (id) ON DELETE CASCADE,
+    PRIMARY KEY (user_id, restaurant_id)
+);
 
 
 INSERT INTO criteria (name)
@@ -110,15 +117,19 @@ VALUES (3, 1),  -- Парковка
        (3, 12), -- Организация бизнес-ланча
        (3, 13); -- Поддержка различных языков для туристов
 
- INSERT INTO users (mobile_number, username, email, password)
- VALUES ('1234567890', 'test', 'test@gmail.com', 'testtesttest');
+INSERT INTO users (mobile_number, username, email, password)
+VALUES ('1234567890', 'test', 'test@gmail.com', 'testtesttest');
 --        ('0987654321', 'user2', 'user2@example.com', 'password2'),
 --        ('5555555555', 'user3', 'user3@example.com', 'password3');
 
 -- -- Заполнение таблицы "reviews" тестовыми данными
 INSERT INTO reviews (mark, comment, restaurant_id, owner_id, criteria_id)
-VALUES
-    (4.5, 'Отличное место! Большой выбор блюд и напитков.', 1, 1, 1); -- Ресторан "Под липами", отзыв от пользователя 1
+VALUES (4.5, 'Отличное место! Большой выбор блюд и напитков.', 1, 1, 1);
+-- Ресторан "Под липами", отзыв от пользователя 1
 --     (4.0, 'Приятное заведение, большой выбор блюд.', 1, 2, 2), -- Ещё один отзыв для Ресторана "Под липами"
 --     (4.2, 'Хорошее кафе, недалеко от пруда.', 2, 2, 2), -- Ресторан "У пруда", отзыв от пользователя 2
 --     (4.0, 'Бар на пляже с шикарным видом.', 3, 3, 3); -- Ресторан "Пляж", отзыв от пользователя 3
+
+INSERT INTO user_favorites (user_id, restaurant_id)
+VALUES (1, 1), -- Пользователь с ID 1 добавил ресторан с ID 1 в избранное
+       (1, 2); -- Пользователь с ID 1 добавил ресторан с ID 2 в избранное

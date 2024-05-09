@@ -4,10 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaUserRepository;
 import ru.xorochki.resSearch.dto.*;
+import ru.xorochki.resSearch.model.Restaurant;
 import ru.xorochki.resSearch.model.User;
 
 import jakarta.validation.ValidationException;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -15,6 +18,8 @@ public class UserServiceImpl implements UserService {
 
     private final JpaUserRepository repository;
     private final UserConverter converter;
+    private final RestaurantConverter restaurantConverter;
+    private final RestaurantService restaurantService;
 
     @Override
     public void remove(Long userId) {
@@ -78,7 +83,6 @@ public class UserServiceImpl implements UserService {
     }
 
     public Long getUserIdByUsername(String username) {
-        // Ваша логика для получения идентификатора пользователя по имени пользователя
         User user = repository.findByUsername(username).orElseThrow();
         return user.getId();
     }
@@ -96,5 +100,17 @@ public class UserServiceImpl implements UserService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<RestaurantResponse> getUserFavorites(Long userId) {
+        User user = repository.findById(userId).orElseThrow();
+        List<Long> favoriteRestaurantIds = user.getFavorites();
+
+        List<Restaurant> favoriteRestaurants = favoriteRestaurantIds.stream()
+                .map(restaurantService::findById)
+                .collect(Collectors.toList());
+
+        return restaurantConverter.restaurantConvertToRestaurantResponses(favoriteRestaurants);
     }
 }
