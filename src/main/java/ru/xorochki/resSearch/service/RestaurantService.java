@@ -19,5 +19,11 @@ public interface RestaurantService {
 
     List<RestaurantResponse> findByCriteriaNumbers(List<Long> criteriaNumbers);
 
-    public List<Restaurant> findByAllCriteria(List<Criteria> criteria);
+    List<Restaurant> findByAllCriteria(List<Criteria> criteria);
+
+    List<RestaurantResponse> getBestRestaurants();
+
+    List<RestaurantResponse> getCheapestRestaurants();
+
+    List<RestaurantResponse> getMostExpensiveRestaurants();
 }

@@ -19,7 +19,6 @@ public class Restaurant {
     private CuisineType cuisineType;
     @Column(name = "price")
     private PriceRange priceRange;
-
     @ManyToMany
     @JoinTable(
             name = "restaurants_criteria",

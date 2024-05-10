@@ -2,10 +2,10 @@ package ru.xorochki.resSearch.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.xorochki.resSearch.dto.RestaurantResponse;
 import ru.xorochki.resSearch.model.Restaurant;
-import ru.xorochki.resSearch.service.CriteriaService;
 import ru.xorochki.resSearch.service.RestaurantService;
 
 import java.util.List;
@@ -16,7 +16,6 @@ import java.util.List;
 public class RestaurantController {
 
     private final RestaurantService service;
-    private final CriteriaService criteriaService;
 
     @PostMapping
     public Restaurant create(@RequestBody Restaurant restaurant) {
@@ -46,5 +45,18 @@ public class RestaurantController {
     @GetMapping("/byCriteriaNumbers")
     public List<RestaurantResponse> getByCriteriaNumbers(@RequestParam List<Long> criteriaNumbers) {
         return service.findByCriteriaNumbers(criteriaNumbers);
+    }
+
+    @GetMapping("/compilations")
+    public String showCompilationsPage(Model model) {
+        List<RestaurantResponse> bestRestaurants = service.getBestRestaurants();
+        List<RestaurantResponse> cheapRestaurants = service.getCheapestRestaurants();
+        List<RestaurantResponse> expensiveRestaurants = service.getMostExpensiveRestaurants();
+
+        model.addAttribute("bestRestaurants", bestRestaurants);
+        model.addAttribute("cheapRestaurants", cheapRestaurants);
+        model.addAttribute("expensiveRestaurants", expensiveRestaurants);
+
+        return "compilations";
     }
 }

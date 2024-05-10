@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Список подходящих ресторанов</title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      color: #333333;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 36pt;
+      margin-bottom: 20px;
+      color: #333333;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    li {
+      margin: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    span {
+      flex: 1;
+      text-align: left;
+      margin-right: 10px;
+    }
+
+    .back-btn {
+      font-size: 20pt;
+      display: block;
+      color: #007bff;
+      text-decoration: none;
+      padding: 13px;
+      transition: color 0.3s;
+      margin-top: 20px;
+    }
+
+    .back-btn:hover {
+      color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<h1>Подборка ресторанов</h1>
+
+<h2>Лучшие рестораны</h2>
+<ul>
+  <li th:each="restaurant : ${bestRestaurants}">
+    <span th:text="${restaurant.name}"></span>
+    <span th:text="${restaurant.rating}"></span>
+    <span th:text="${restaurant.cuisineType}"></span>
+    <span th:text="${restaurant.priceRange}"></span>
+  </li>
+</ul>
+
+<h2>Дешевые рестораны</h2>
+<ul>
+  <li th:each="restaurant : ${cheapRestaurants}">
+    <span th:text="${restaurant.name}"></span>
+    <span th:text="${restaurant.rating}"></span>
+    <span th:text="${restaurant.cuisineType}"></span>
+    <span th:text="${restaurant.priceRange}"></span>
+  </li>
+</ul>
+
+<h2>Дорогие рестораны</h2>
+<ul>
+  <li th:each="restaurant : ${expensiveRestaurants}">
+    <span th:text="${restaurant.name}"></span>
+    <span th:text="${restaurant.rating}"></span>
+    <span th:text="${restaurant.cuisineType}"></span>
+    <span th:text="${restaurant.priceRange}"></span>
+  </li>
+</ul>
+
+<a href="/home" class="back-btn">Вернуться на домашнюю страницу</a>
+</body>
+</html>

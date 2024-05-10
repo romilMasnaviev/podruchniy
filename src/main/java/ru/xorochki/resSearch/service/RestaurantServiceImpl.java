@@ -86,6 +86,23 @@ public class RestaurantServiceImpl implements RestaurantService {
         return repository.findByAllCriteria(criteria, criteria.size());
     }
 
+    @Override
+    public List<RestaurantResponse> getBestRestaurants() {
+        return converter.restaurantConvertToRestaurantResponses(repository.findTop10ByOrderByRatingDesc());
+    }
+
+    @Override
+    public List<RestaurantResponse> getCheapestRestaurants() {
+        List<Restaurant> cheapestRestaurants = repository.findCheapRestaurants();
+        return  converter.restaurantConvertToRestaurantResponses(cheapestRestaurants);
+    }
+
+    @Override
+    public List<RestaurantResponse> getMostExpensiveRestaurants() {
+        List<Restaurant> mostExpensiveRestaurants = repository.findExpensiveRestaurants();
+        return  converter.restaurantConvertToRestaurantResponses(mostExpensiveRestaurants);
+    }
+
     private Long getCountSameCriteria(List<Criteria> firstCriteriaList, List<Criteria> secondCriteriaList) {
         Set<Criteria> firstCriteriaSet = new HashSet<>(firstCriteriaList);
         Set<Criteria> secondCriteriaSet = new HashSet<>(secondCriteriaList);
