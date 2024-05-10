@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Restaurant Details</title>
+  <title>Ресторан добавлен в избранное</title>
   <style>
     body {
       background-color: #f0f0f0;
@@ -14,6 +14,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
     }
 
     h1 {
@@ -22,13 +23,12 @@
       color: #333333;
     }
 
-    .restaurant-details {
-      margin-bottom: 20px;
-      width: 80%;
-      padding: 20px;
+    .message {
       background-color: #ffffff;
+      padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
     }
 
     .btn {
@@ -48,20 +48,10 @@
   </style>
 </head>
 <body>
-<h1>Restaurant Details</h1>
+<h1>Ресторан добавлен в избранное</h1>
 
-<div class="restaurant-details">
-  <h2 th:text="${restaurant.name}"></h2>
-  <p>Rating: <span th:text="${restaurant.rating}"></span></p>
-  <p>Cuisine Type: <span th:text="${restaurant.cuisineType}"></span></p>
-  <p>Price Range: <span th:text="${restaurant.priceRange}"></span></p>
-
-  <form action="/users/favorites/add" method="get">
-    <input type="hidden" name="restaurantId" th:value="${restaurant.id}" />
-    <button type="submit" class="btn">Добавить в избранное</button>
-  </form>
-
-  <a th:href="@{'/reviews/create?restaurantId=' + ${restaurant.id}}" class="btn">Оставить отзыв</a>
+<div class="message">
+  <p>Ресторан успешно добавлен в ваш список избранных.</p>
 </div>
 
 <a href="/home" class="btn">Вернуться на домашнюю страницу</a>

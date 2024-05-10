@@ -2,6 +2,7 @@ package ru.xorochki.resSearch.service;
 
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaUserRepository;
 import ru.xorochki.resSearch.dto.*;
@@ -111,5 +112,12 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
 
         return restaurantConverter.restaurantConvertToRestaurantResponses(favoriteRestaurants);
+    }
+
+    @Override
+    public void addFavorites(Long restaurantId, UserDetails userDetails) {
+        User user = repository.findById(getUserIdByUsername(userDetails.getUsername())).orElseThrow();
+        user.getFavorites().add(restaurantId);
+        repository.save(user);
     }
 }

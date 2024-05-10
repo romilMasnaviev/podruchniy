@@ -3,6 +3,7 @@ package ru.xorochki.resSearch.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,13 @@ public class UserController {
             log.warn("User is not authenticated, redirecting to login page");
             return "redirect:/login";
         }
+    }
+
+    @GetMapping("/favorites/add")
+    public String addToFavorites(@RequestParam("restaurantId") Long restaurantId,
+                                 @AuthenticationPrincipal UserDetails userDetails) {
+        userService.addFavorites(restaurantId,userDetails);
+        return "restaurant_added_to_favorites";
     }
 
 

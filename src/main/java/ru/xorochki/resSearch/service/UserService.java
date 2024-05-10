@@ -1,5 +1,6 @@
 package ru.xorochki.resSearch.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import ru.xorochki.resSearch.dto.*;
 import ru.xorochki.resSearch.model.User;
 
@@ -25,4 +26,7 @@ public interface UserService {
     UserResponse getUserById(Long userId);
 
     List<RestaurantResponse> getUserFavorites(Long userId);
+
+    void addFavorites(Long restaurantId, UserDetails userDetails);
+
 }

@@ -56,10 +56,11 @@
   <p>Cuisine Type: <span th:text="${restaurant.cuisineType}"></span></p>
   <p>Price Range: <span th:text="${restaurant.priceRange}"></span></p>
 
-  <!-- Кнопка "Добавить в избранное" -->
-  <a href="#" class="btn">Добавить в избранное</a>
+  <form action="/users/favorites/add" method="get">
+    <input type="hidden" name="restaurantId" th:value="${restaurant.id}" />
+    <button type="submit" class="btn">Добавить в избранное</button>
+  </form>
 
-  <!-- Кнопка "Оставить отзыв" -->
   <a th:href="@{'/reviews/create?restaurantId=' + ${restaurant.id}}" class="btn">Оставить отзыв</a>
 </div>
 
