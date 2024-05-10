@@ -1,5 +1,6 @@
 package ru.xorochki.resSearch.service;
 
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaRestaurantRepository;
@@ -7,7 +8,7 @@ import ru.xorochki.resSearch.dto.RestaurantConverter;
 import ru.xorochki.resSearch.dto.RestaurantResponse;
 import ru.xorochki.resSearch.model.Criteria;
 import ru.xorochki.resSearch.model.Restaurant;
-import jakarta.validation.ValidationException;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -94,13 +95,19 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public List<RestaurantResponse> getCheapestRestaurants() {
         List<Restaurant> cheapestRestaurants = repository.findCheapRestaurants();
-        return  converter.restaurantConvertToRestaurantResponses(cheapestRestaurants);
+        return converter.restaurantConvertToRestaurantResponses(cheapestRestaurants);
     }
 
     @Override
     public List<RestaurantResponse> getMostExpensiveRestaurants() {
         List<Restaurant> mostExpensiveRestaurants = repository.findExpensiveRestaurants();
-        return  converter.restaurantConvertToRestaurantResponses(mostExpensiveRestaurants);
+        return converter.restaurantConvertToRestaurantResponses(mostExpensiveRestaurants);
+    }
+
+    @Override
+    public RestaurantResponse getRestaurantById(Long id) {
+        Restaurant restaurant = repository.findById(id).orElseThrow();
+        return converter.restaurantConvertToRestaurantResponses(restaurant);
     }
 
     private Long getCountSameCriteria(List<Criteria> firstCriteriaList, List<Criteria> secondCriteriaList) {

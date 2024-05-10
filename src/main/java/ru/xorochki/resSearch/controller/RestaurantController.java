@@ -27,9 +27,11 @@ public class RestaurantController {
         return service.update(restaurant, restaurantId);
     }
 
-    @GetMapping("/{restaurantId}")
-    public Restaurant get(@PathVariable Long restaurantId) {
-        return service.findById(restaurantId);
+    @GetMapping("/{id}")
+    public String showRestaurantPage(@PathVariable Long id, Model model) {
+        RestaurantResponse restaurantResponse = service.getRestaurantById(id);
+        model.addAttribute("restaurant", restaurantResponse);
+        return "restaurant";
     }
 
     @DeleteMapping("/{restaurantId}")
@@ -52,11 +54,9 @@ public class RestaurantController {
         List<RestaurantResponse> bestRestaurants = service.getBestRestaurants();
         List<RestaurantResponse> cheapRestaurants = service.getCheapestRestaurants();
         List<RestaurantResponse> expensiveRestaurants = service.getMostExpensiveRestaurants();
-
         model.addAttribute("bestRestaurants", bestRestaurants);
         model.addAttribute("cheapRestaurants", cheapRestaurants);
         model.addAttribute("expensiveRestaurants", expensiveRestaurants);
-
         return "compilations";
     }
 }

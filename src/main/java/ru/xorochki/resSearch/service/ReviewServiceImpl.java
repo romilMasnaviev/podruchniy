@@ -5,12 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaRestaurantRepository;
 import ru.xorochki.resSearch.dao.JpaReviewRepository;
+import ru.xorochki.resSearch.dao.JpaUserRepository;
 import ru.xorochki.resSearch.dto.ReviewConverter;
+import ru.xorochki.resSearch.dto.ReviewRequest;
 import ru.xorochki.resSearch.dto.ReviewResponse;
-import ru.xorochki.resSearch.model.Criteria;
-import ru.xorochki.resSearch.model.Restaurant;
 import ru.xorochki.resSearch.model.Review;
-
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,29 +22,16 @@ public class ReviewServiceImpl implements ReviewService {
     private final JpaReviewRepository reviewRepository;
     private final JpaRestaurantRepository restaurantRepository;
     private final ReviewConverter converter;
+    private final JpaUserRepository userRepository;
 
     @Override
-    public Review create(Review review) {
-        try {
-            Review savedReview = reviewRepository.save(review);
-            String comment = review.getComment();
-            Map<String, Integer> wordFrequency = analyzeReviewContent(comment);
-            Optional<Restaurant> restaurantOptional = restaurantRepository.findById(review.getRestaurant().getId());
-            if (restaurantOptional.isEmpty()) {
-                throw new ValidationException("Restaurant not found for review");
-            }
-            Restaurant restaurant = restaurantOptional.get();
-            for (Map.Entry<String, Integer> entry : wordFrequency.entrySet()) {
-                if (entry.getValue() > 3) {
-                    Criteria criteria = new Criteria(entry.getKey());
-                    restaurant.getCriteria().add(criteria);
-                }
-            }
-            restaurantRepository.save(restaurant);
-            return savedReview;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to create review: " + e.getMessage());
-        }
+    public Review create(ReviewRequest review) {
+        Review newReview = new Review();
+        newReview.setComment(review.getComment());
+        newReview.setOwner(userRepository.getReferenceById(review.getUserId()));
+        newReview.setRestaurant(restaurantRepository.getReferenceById(review.getRestaurantId()));
+        newReview.setMark(review.getMark());
+        return reviewRepository.save(newReview);
     }
 
     private Map<String, Integer> analyzeReviewContent(String content) {

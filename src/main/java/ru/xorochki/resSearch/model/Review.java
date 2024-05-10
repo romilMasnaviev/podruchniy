@@ -8,6 +8,7 @@ import lombok.Data;
 @Table(name = "reviews")
 public class Review {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Float mark;
     private String comment;

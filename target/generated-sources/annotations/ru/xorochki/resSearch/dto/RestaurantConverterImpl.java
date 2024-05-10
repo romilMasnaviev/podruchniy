@@ -9,7 +9,7 @@ import ru.xorochki.resSearch.model.Review;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-09T21:39:39+0300",
+    date = "2024-05-10T22:05:46+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -23,28 +23,29 @@ public class RestaurantConverterImpl implements RestaurantConverter {
 
         List<RestaurantResponse> list = new ArrayList<RestaurantResponse>( matchingRestaurants.size() );
         for ( Restaurant restaurant : matchingRestaurants ) {
-            list.add( restaurantToRestaurantResponse( restaurant ) );
+            list.add( restaurantConvertToRestaurantResponses( restaurant ) );
         }
 
         return list;
     }
 
-    protected RestaurantResponse restaurantToRestaurantResponse(Restaurant restaurant) {
-        if ( restaurant == null ) {
+    @Override
+    public RestaurantResponse restaurantConvertToRestaurantResponses(Restaurant matchingRestaurants) {
+        if ( matchingRestaurants == null ) {
             return null;
         }
 
         RestaurantResponse restaurantResponse = new RestaurantResponse();
 
-        restaurantResponse.setId( restaurant.getId() );
-        restaurantResponse.setName( restaurant.getName() );
-        restaurantResponse.setRating( restaurant.getRating() );
-        List<Review> list = restaurant.getReviews();
+        restaurantResponse.setId( matchingRestaurants.getId() );
+        restaurantResponse.setName( matchingRestaurants.getName() );
+        restaurantResponse.setRating( matchingRestaurants.getRating() );
+        List<Review> list = matchingRestaurants.getReviews();
         if ( list != null ) {
             restaurantResponse.setReviews( new ArrayList<Review>( list ) );
         }
-        restaurantResponse.setCuisineType( restaurant.getCuisineType() );
-        restaurantResponse.setPriceRange( restaurant.getPriceRange() );
+        restaurantResponse.setCuisineType( matchingRestaurants.getCuisineType() );
+        restaurantResponse.setPriceRange( matchingRestaurants.getPriceRange() );
 
         return restaurantResponse;
     }

@@ -1,13 +1,12 @@
 package ru.xorochki.resSearch.service;
 
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaUserRepository;
 import ru.xorochki.resSearch.dto.*;
 import ru.xorochki.resSearch.model.Restaurant;
 import ru.xorochki.resSearch.model.User;
-
-import jakarta.validation.ValidationException;
 
 import java.util.List;
 import java.util.stream.Collectors;

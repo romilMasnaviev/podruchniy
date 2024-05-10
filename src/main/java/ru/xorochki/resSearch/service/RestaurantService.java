@@ -11,7 +11,7 @@ public interface RestaurantService {
 
     Restaurant findById(Long restaurantId);
 
-    void remove( Long restaurantId);
+    void remove(Long restaurantId);
 
     Restaurant update(Restaurant restaurant, Long restaurantId);
 
@@ -26,4 +26,7 @@ public interface RestaurantService {
     List<RestaurantResponse> getCheapestRestaurants();
 
     List<RestaurantResponse> getMostExpensiveRestaurants();
+
+    public RestaurantResponse getRestaurantById(Long id);
+
 }

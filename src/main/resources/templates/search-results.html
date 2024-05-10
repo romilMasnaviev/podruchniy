@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Список подходящих ресторанов</title>
     <style>
         body {
@@ -40,6 +40,14 @@
             padding: 10px;
         }
 
+        a {
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
         span {
             flex: 1;
             text-align: left;
@@ -65,12 +73,14 @@
 <h1>Список подходящих ресторанов</h1>
 <ul>
     <li th:each="restaurant : ${restaurants}">
-        <span th:text="${restaurant.name}"></span>
-        <span th:text="${restaurant.rating}"></span>
-        <span th:text="${restaurant.cuisineType}"></span>
-        <span th:text="${restaurant.priceRange}"></span>
+        <a th:href="@{'/restaurants/' + ${restaurant.id}}">
+            <span th:text="${restaurant.name}"></span>
+            <span th:text="${restaurant.rating}"></span>
+            <span th:text="${restaurant.cuisineType}"></span>
+            <span th:text="${restaurant.priceRange}"></span>
+        </a>
     </li>
 </ul>
-<a href="/home" class="back-btn">Вернуться на домашнюю страницу</a>
+<a class="back-btn" href="/home">Вернуться на домашнюю страницу</a>
 </body>
 </html>

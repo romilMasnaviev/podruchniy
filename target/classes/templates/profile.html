@@ -1,65 +1,64 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Профиль пользователя</title>
-  <style>
-    body {
-      background-color: #f0f0f0;
-      color: #333333;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Профиль пользователя</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            color: #333333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    h1 {
-      font-size: 36pt;
-      margin-bottom: 20px;
-      color: #333333;
-    }
+        h1 {
+            font-size: 36pt;
+            margin-bottom: 20px;
+            color: #333333;
+        }
 
-    p {
-      font-size: 16pt;
-      margin-bottom: 10px;
-    }
+        p {
+            font-size: 16pt;
+            margin-bottom: 10px;
+        }
 
-    span {
-      font-weight: bold;
-    }
+        span {
+            font-weight: bold;
+        }
 
-    .back-btn {
-      font-size: 16pt;
-      color: #007bff;
-      text-decoration: none;
-      padding: 10px;
-      margin-bottom: 10px;
-      transition: color 0.3s;
-    }
+        .back-btn {
+            font-size: 16pt;
+            color: #007bff;
+            text-decoration: none;
+            padding: 10px;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
 
-    .back-btn:hover {
-      color: #0056b3;
-    }
-  </style>
+        .back-btn:hover {
+            color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 <h1>Профиль пользователя</h1>
 
-<a th:href="@{'/reviews/' + ${userResponse.id} + '/reviews'}" class="back-btn">Мои оценки</a>
-<a href="/users/favorites" class="back-btn">Избранное</a>
-<a href="/home" class="back-btn">На главную</a>
+<a class="back-btn" th:href="@{'/reviews/' + ${userResponse.id} + '/reviews'}">Мои оценки</a>
+<a class="back-btn" href="/users/favorites">Избранное</a>
 
 <div th:if="${userResponse != null}">
-  <p>User ID: <span th:text="${userResponse.id}"></span></p>
-  <p>Имя пользователя: <span th:text="${userResponse.username}"></span></p>
-  <p>Мобильный номер: <span th:text="${userResponse.mobileNumber}"></span></p>
-  <p>Email: <span th:text="${userResponse.email}"></span></p>
-  <!-- You can add more fields here as needed -->
+    <p>User ID: <span th:text="${userResponse.id}"></span></p>
+    <p>Имя пользователя: <span th:text="${userResponse.username}"></span></p>
+    <p>Мобильный номер: <span th:text="${userResponse.mobileNumber}"></span></p>
+    <p>Email: <span th:text="${userResponse.email}"></span></p>
+    <!-- You can add more fields here as needed -->
 </div>
 
-<a href="/home" class="back-btn">Вернуться на главную</a>
+<a class="back-btn" href="/home">Вернуться на главную</a>
 </body>
 </html>

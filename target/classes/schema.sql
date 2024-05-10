@@ -42,8 +42,7 @@ CREATE TABLE IF NOT EXISTS reviews
     mark          REAL,
     comment       VARCHAR(200),
     restaurant_id BIGINT REFERENCES restaurants (id) ON DELETE CASCADE,
-    owner_id      BIGINT REFERENCES users (id) ON DELETE CASCADE,
-    criteria_id   BIGINT REFERENCES criteria (id) ON DELETE CASCADE
+    owner_id      BIGINT REFERENCES users (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS user_favorites
@@ -123,8 +122,8 @@ VALUES ('1234567890', 'test', 'test@gmail.com', 'testtesttest');
 --        ('5555555555', 'user3', 'user3@example.com', 'password3');
 
 -- -- Заполнение таблицы "reviews" тестовыми данными
-INSERT INTO reviews (mark, comment, restaurant_id, owner_id, criteria_id)
-VALUES (4.5, 'Отличное место! Большой выбор блюд и напитков.', 1, 1, 1);
+INSERT INTO reviews (mark, comment, restaurant_id, owner_id)
+VALUES (4.5, 'Отличное место! Большой выбор блюд и напитков.', 1, 1);
 -- Ресторан "Под липами", отзыв от пользователя 1
 --     (4.0, 'Приятное заведение, большой выбор блюд.', 1, 2, 2), -- Ещё один отзыв для Ресторана "Под липами"
 --     (4.2, 'Хорошее кафе, недалеко от пруда.', 2, 2, 2), -- Ресторан "У пруда", отзыв от пользователя 2
