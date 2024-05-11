@@ -34,21 +34,6 @@ public class RestaurantController {
         return "restaurant";
     }
 
-    @DeleteMapping("/{restaurantId}")
-    public void remove(@PathVariable Long restaurantId) {
-        service.remove(restaurantId);
-    }
-
-    @GetMapping("/same/{restaurantId}")
-    public List<Restaurant> getSameRestaurant(@PathVariable Long restaurantId) {
-        return service.getSameRestaurant(restaurantId);
-    }
-
-    @GetMapping("/byCriteriaNumbers")
-    public List<RestaurantResponse> getByCriteriaNumbers(@RequestParam List<Long> criteriaNumbers) {
-        return service.findByCriteriaNumbers(criteriaNumbers);
-    }
-
     @GetMapping("/compilations")
     public String showCompilationsPage(Model model) {
         List<RestaurantResponse> bestRestaurants = service.getBestRestaurants();
