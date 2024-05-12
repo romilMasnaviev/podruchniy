@@ -63,9 +63,4 @@ public class ReviewController {
         model.addAttribute("reviews", reviews);
         return "user_reviews";
     }
-
-    @DeleteMapping("/{reviewId}")
-    public void remove(@PathVariable Long reviewId) {
-        service.remove(reviewId);
-    }
 }
