@@ -27,6 +27,6 @@ public interface RestaurantService {
 
     List<RestaurantResponse> getMostExpensiveRestaurants();
 
-    public RestaurantResponse getRestaurantById(Long id);
+    RestaurantResponse getRestaurantById(Long id);
 
 }

@@ -13,9 +13,7 @@ import ru.xorochki.resSearch.dto.ReviewResponse;
 import ru.xorochki.resSearch.model.Restaurant;
 import ru.xorochki.resSearch.model.Review;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service

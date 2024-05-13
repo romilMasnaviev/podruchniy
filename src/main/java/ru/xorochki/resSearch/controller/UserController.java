@@ -47,7 +47,7 @@ public class UserController {
     @GetMapping("/favorites/add")
     public String addToFavorites(@RequestParam("restaurantId") Long restaurantId,
                                  @AuthenticationPrincipal UserDetails userDetails) {
-        userService.addFavorites(restaurantId,userDetails);
+        userService.addFavorites(restaurantId, userDetails);
         return "restaurant_added_to_favorites";
     }
 
