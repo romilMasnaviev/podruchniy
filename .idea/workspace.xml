@@ -4,8 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bcd6052e-9942-4764-9e26-f0eb09cabd3e" name="Changes" comment="Сделано Добавление в Избранное">
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/ReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/ReviewServiceImpl.java" afterDir="false" />
+    <list default="true" id="bcd6052e-9942-4764-9e26-f0eb09cabd3e" name="Changes" comment="Добавлено изменение рейтинга ресторана исходя из отзывов на него">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/RestaurantController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/RestaurantController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/ReviewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/ReviewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/service/ReviewServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/service/ReviewServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/restaurant.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/restaurant.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/restaurant_added_to_favorites.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/restaurant_added_to_favorites.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/review_created.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/review_created.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/review_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/review_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/CriteriaConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/CriteriaConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/RestaurantConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/RestaurantConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/ReviewConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/ReviewConverterImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,28 +73,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;add-thymyleaf&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/romilmasnaviev/dev/podruchniy&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.web.browsers&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/romilmasnaviev/dev/podruchniy",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.web.browsers",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="ru.xorochki.resSearch.securingweb" />
@@ -119,6 +135,7 @@
       <workItem from="1715104230486" duration="3623000" />
       <workItem from="1715195898264" duration="8833000" />
       <workItem from="1715274106190" duration="30761000" />
+      <workItem from="1716195403977" duration="902000" />
     </task>
     <task id="LOCAL-00001" summary="add postman tests">
       <option name="closed" value="true" />

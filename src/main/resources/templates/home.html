@@ -49,11 +49,46 @@
         a:hover {
             color: #0056b3;
         }
+
+        .search-container {
+            margin: 20px 0;
+        }
+
+        .search-input {
+            padding: 15px;
+            font-size: 20pt;
+            width: 500px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-button {
+            padding: 15px;
+            font-size: 20pt;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
 <h1>Подручный</h1>
 <p>Поиск подходящих ресторанов</p>
+
+<div class="search-container">
+    <form action="/search" method="get">
+        <input type="text" name="query" class="search-input" placeholder="Введите запрос">
+        <button type="submit" class="search-button">Поиск</button>
+    </form>
+</div>
+
 <ul>
     <li><a href="/criteria/search">Поиск по параметрам</a></li>
     <li><a href="/restaurants/compilations">Подборки</a></li>

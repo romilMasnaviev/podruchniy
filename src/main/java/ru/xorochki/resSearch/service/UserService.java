@@ -10,16 +10,11 @@ public interface UserService {
 
     User create(UserRequest request);
 
-    void remove(Long userId);
-
     UserResponse update(UserUpdateRequest user, Long userId);
 
     List<UserResponse> getAll();
 
     UserResponse get(Long userId);
-
-    void checkUserExist(LoginRequest loginRequest);
-
 
     Long getUserIdByUsername(String username);
 
@@ -28,5 +23,7 @@ public interface UserService {
     List<RestaurantResponse> getUserFavorites(Long userId);
 
     void addFavorites(Long restaurantId, UserDetails userDetails);
+
+    List<RestaurantResponse> getByStr(String str);
 
 }

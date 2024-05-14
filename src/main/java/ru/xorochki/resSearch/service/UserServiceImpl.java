@@ -120,4 +120,9 @@ public class UserServiceImpl implements UserService {
         user.getFavorites().add(restaurantId);
         repository.save(user);
     }
+
+    @Override
+    public List<RestaurantResponse> getByStr(String str) {
+
+    }
 }

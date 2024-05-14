@@ -11,8 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import ru.xorochki.resSearch.dto.RestaurantResponse;
 import ru.xorochki.resSearch.dto.UserResponse;
 import ru.xorochki.resSearch.service.UserService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -72,5 +77,14 @@ public class LoginController {
             logger.warn("User is not authenticated, redirecting to login page");
             return "redirect:/login";
         }
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam(name = "query") String query, Model model) {
+
+
+        List<RestaurantResponse> restaurants = new ArrayList<>();
+        model.addAttribute("restaurants", restaurants);
+        return "search-results";
     }
 }
