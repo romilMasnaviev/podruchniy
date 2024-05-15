@@ -5,22 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bcd6052e-9942-4764-9e26-f0eb09cabd3e" name="Changes" comment="Добавлено изменение рейтинга ресторана исходя из отзывов на него">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/RestaurantService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/RestaurantServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/RestaurantServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/RestaurantController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/RestaurantController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/ReviewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/ReviewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/service/ReviewServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/service/ReviewServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/restaurant.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/restaurant.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/restaurant_added_to_favorites.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/restaurant_added_to_favorites.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/review_created.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/review_created.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/review_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/review_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/CriteriaConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/CriteriaConverterImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/RestaurantConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/RestaurantConverterImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/ReviewConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/ReviewConverterImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +124,7 @@
       <workItem from="1715104230486" duration="3623000" />
       <workItem from="1715195898264" duration="8833000" />
       <workItem from="1715274106190" duration="30761000" />
-      <workItem from="1716195403977" duration="902000" />
+      <workItem from="1716195403977" duration="1218000" />
     </task>
     <task id="LOCAL-00001" summary="add postman tests">
       <option name="closed" value="true" />

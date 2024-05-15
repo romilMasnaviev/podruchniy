@@ -24,6 +24,4 @@ public interface UserService {
 
     void addFavorites(Long restaurantId, UserDetails userDetails);
 
-    List<RestaurantResponse> getByStr(String str);
-
 }

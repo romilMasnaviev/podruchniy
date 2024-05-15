@@ -22,14 +22,6 @@ public class UserServiceImpl implements UserService {
     private final RestaurantService restaurantService;
 
     @Override
-    public void remove(Long userId) {
-        if (!repository.existsById(userId)) {
-            throw new ValidationException("User doesn't exist");
-        }
-        repository.deleteById(userId);
-    }
-
-    @Override
     public UserResponse update(UserUpdateRequest userUpdateDto, Long userId) {
         User existingUser = repository.findById(userId)
                 .orElseThrow(() -> new ValidationException("User doesn't exist"));
@@ -47,13 +39,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse get(Long userId) {
         return converter.UserConvertToUserGetResponse(repository.findById(userId).orElseThrow());
-    }
-
-    @Override
-    public void checkUserExist(LoginRequest loginRequest) {
-        if (!repository.existsByUsernameAndPassword(loginRequest.getUsername(), loginRequest.getPassword())) {
-            throw new ValidationException("Не существует такого пользователя");
-        }
     }
 
     @Override
@@ -119,10 +104,5 @@ public class UserServiceImpl implements UserService {
         User user = repository.findById(getUserIdByUsername(userDetails.getUsername())).orElseThrow();
         user.getFavorites().add(restaurantId);
         repository.save(user);
-    }
-
-    @Override
-    public List<RestaurantResponse> getByStr(String str) {
-
     }
 }

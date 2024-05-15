@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.xorochki.resSearch.dto.RestaurantResponse;
 import ru.xorochki.resSearch.dto.UserResponse;
+import ru.xorochki.resSearch.service.RestaurantService;
 import ru.xorochki.resSearch.service.UserService;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class LoginController {
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     private final UserService userService;
+    private final RestaurantService restaurantService;
 
     @GetMapping("/login")
     public String showLoginForm() {
@@ -83,7 +85,8 @@ public class LoginController {
     public String search(@RequestParam(name = "query") String query, Model model) {
 
 
-        List<RestaurantResponse> restaurants = new ArrayList<>();
+        //TODO
+        List<RestaurantResponse> restaurants = restaurantService.getCheapestRestaurants();
         model.addAttribute("restaurants", restaurants);
         return "search-results";
     }
