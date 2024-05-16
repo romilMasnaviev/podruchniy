@@ -13,8 +13,6 @@ public class Restaurant {
     private Long id;
     private String name;
     private Float rating;
-    @OneToMany(mappedBy = "restaurant")
-    private List<Review> reviews;
     @Column(name = "cuisine")
     private CuisineType cuisineType;
     @Column(name = "price")

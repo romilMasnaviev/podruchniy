@@ -2,19 +2,21 @@ package ru.xorochki.resSearch.service;
 
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.xorochki.resSearch.dao.JpaCriteriaRepository;
 import ru.xorochki.resSearch.dao.JpaRestaurantRepository;
 import ru.xorochki.resSearch.dao.JpaReviewRepository;
 import ru.xorochki.resSearch.dao.JpaUserRepository;
 import ru.xorochki.resSearch.dto.ReviewConverter;
 import ru.xorochki.resSearch.dto.ReviewRequest;
 import ru.xorochki.resSearch.dto.ReviewResponse;
+import ru.xorochki.resSearch.model.Criteria;
 import ru.xorochki.resSearch.model.Restaurant;
 import ru.xorochki.resSearch.model.Review;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +25,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final JpaRestaurantRepository restaurantRepository;
     private final ReviewConverter converter;
     private final JpaUserRepository userRepository;
+    private final JpaCriteriaRepository criteriaRepository;
 
     @Override
     @Transactional
@@ -87,5 +90,44 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<ReviewResponse> findReviewsByUserId(Long userId) {
         return converter.reviewConvertToReviewResponse(reviewRepository.findByOwner_Id(userId));
+    }
+
+    @Override
+    @Transactional
+    public void addCriteriaFromReviews(Long restaurantId,String username) {
+        // Получаем все отзывы для указанного ресторана
+        List<Review> reviews = reviewRepository.findAllByRestaurant_Id(restaurantId);
+        System.out.println("reviews");
+        System.out.println(reviews);
+
+        // Создаем карту для подсчета количества повторений каждого слова в отзывах
+        Map<String, Integer> wordCounts = new HashMap<>();
+        for (Review review : reviews) {
+            String[] words = review.getComment().split("\\s+");
+            for (String word : words) {
+                // Игнорируем короткие слова, например, артикли или союзы
+                if (word.length() > 2) {
+                    wordCounts.put(word.toLowerCase(), wordCounts.getOrDefault(word.toLowerCase(), 0) + 1);
+                }
+            }
+        }
+        System.out.println("map");
+        System.out.println(wordCounts);
+
+        // Добавляем в критерии ресторана слова, которые встречаются чаще 3 раз
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElse(null);
+        if (restaurant != null) {
+            List<Criteria> criteria = restaurant.getCriteria();
+            for (Map.Entry<String, Integer> entry : wordCounts.entrySet()) {
+                if (entry.getValue() >= 3) {
+                    Criteria newCriteria = new Criteria();
+                    newCriteria.setName(entry.getKey());
+                    criteriaRepository.save(newCriteria);
+                    criteria.add(new Criteria(entry.getKey()));
+                    System.out.println("SUCCESS");
+                }
+            }
+            restaurantRepository.save(restaurant);
+        }
     }
 }

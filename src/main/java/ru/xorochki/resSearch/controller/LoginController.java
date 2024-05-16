@@ -85,8 +85,8 @@ public class LoginController {
     public String search(@RequestParam(name = "query") String query, Model model) {
 
 
-        //TODO
-        List<RestaurantResponse> restaurants = restaurantService.getCheapestRestaurants();
+
+        List<RestaurantResponse> restaurants = restaurantService.getByStr(query);
         model.addAttribute("restaurants", restaurants);
         return "search-results";
     }

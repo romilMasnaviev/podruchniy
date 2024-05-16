@@ -30,6 +30,7 @@ public class ReviewController {
         reviewRequest.setUsername(userId);
         reviewRequest.setUserId(userService.getUserIdByUsername(userId));
         model.addAttribute("reviewRequest", reviewRequest);
+        service.addCriteriaFromReviews(restaurantId,userDetails.getUsername());
         return "review_form";
     }
 

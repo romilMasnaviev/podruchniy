@@ -2,8 +2,12 @@ package ru.xorochki.resSearch.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "reviews")
 public class Review {
@@ -12,10 +16,10 @@ public class Review {
     private Long id;
     private Float mark;
     private String comment;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
     private Restaurant restaurant;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User owner;
 }

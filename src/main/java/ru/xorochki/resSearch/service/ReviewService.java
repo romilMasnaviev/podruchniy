@@ -17,4 +17,6 @@ public interface ReviewService {
 
     List<ReviewResponse> findReviewsByUserId(Long userId);
 
+    void addCriteriaFromReviews(Long restaurantId, String userName);
+
 }

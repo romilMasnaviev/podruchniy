@@ -29,6 +29,6 @@ public interface RestaurantService {
 
     RestaurantResponse getRestaurantById(Long id);
 
-    public List<RestaurantResponse> getByStr(String str);
+    List<RestaurantResponse> getByStr(String str);
 
 }

@@ -5,11 +5,10 @@ import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 import ru.xorochki.resSearch.model.Restaurant;
-import ru.xorochki.resSearch.model.Review;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-13T16:26:07+0300",
+    date = "2024-05-20T13:33:58+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
@@ -40,10 +39,6 @@ public class RestaurantConverterImpl implements RestaurantConverter {
         restaurantResponse.setId( matchingRestaurants.getId() );
         restaurantResponse.setName( matchingRestaurants.getName() );
         restaurantResponse.setRating( matchingRestaurants.getRating() );
-        List<Review> list = matchingRestaurants.getReviews();
-        if ( list != null ) {
-            restaurantResponse.setReviews( new ArrayList<Review>( list ) );
-        }
         restaurantResponse.setCuisineType( matchingRestaurants.getCuisineType() );
         restaurantResponse.setPriceRange( matchingRestaurants.getPriceRange() );
 

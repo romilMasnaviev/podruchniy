@@ -4,10 +4,12 @@ import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaRestaurantRepository;
+import ru.xorochki.resSearch.dao.JpaReviewRepository;
 import ru.xorochki.resSearch.dto.RestaurantConverter;
 import ru.xorochki.resSearch.dto.RestaurantResponse;
 import ru.xorochki.resSearch.model.Criteria;
 import ru.xorochki.resSearch.model.Restaurant;
+import ru.xorochki.resSearch.model.Review;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,6 +20,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private final JpaRestaurantRepository repository;
     private final RestaurantConverter converter;
+    private final JpaReviewRepository reviewRepository;
 
     @Override
     public Restaurant create(Restaurant restaurant) {
@@ -110,13 +113,58 @@ public class RestaurantServiceImpl implements RestaurantService {
         return converter.restaurantConvertToRestaurantResponses(restaurant);
     }
 
-    @Override
     public List<RestaurantResponse> getByStr(String str) {
         List<Restaurant> restaurants = repository.findAll();
 
+        List<String> criteria = extractCriteria(str);
 
+        List<RestaurantMatch> restaurantMatches = new ArrayList<>();
+        for (Restaurant restaurant : restaurants) {
+            int matchCount = 0;
+            for (Review review : reviewRepository.findAllByRestaurant_Id(restaurant.getId())) { //TODO
+                System.out.println("123123123" + reviewRepository.findAllByRestaurant_Id(restaurant.getId()));
+                for (String word : criteria) {
+                    if (review.getComment().contains(word)) {
+                        matchCount++;
+                    }
+                }
+            }
+            if (matchCount > 0) {
+                restaurantMatches.add(new RestaurantMatch(restaurant, matchCount));
+            }
+        }
 
-        return converter.restaurantConvertToRestaurantResponses(restaurants);
+        restaurantMatches.sort(Comparator.comparingInt(RestaurantMatch::getMatchCount).reversed());
+
+        List<RestaurantResponse> restaurantResponses = new ArrayList<>();
+        for (RestaurantMatch restaurantMatch : restaurantMatches) {
+            restaurantResponses.add(converter.restaurantConvertToRestaurantResponses(restaurantMatch.getRestaurant()));
+        }
+
+        return restaurantResponses;
+    }
+
+    private List<String> extractCriteria(String str) {
+        // Заглушка: разбиваем строку на слова и возвращаем как критерии поиска
+        return Arrays.asList(str.split("\\s+"));
+    }
+
+    static class RestaurantMatch {
+        private Restaurant restaurant;
+        private int matchCount;
+
+        public RestaurantMatch(Restaurant restaurant, int matchCount) {
+            this.restaurant = restaurant;
+            this.matchCount = matchCount;
+        }
+
+        public Restaurant getRestaurant() {
+            return restaurant;
+        }
+
+        public int getMatchCount() {
+            return matchCount;
+        }
     }
 
     private Long getCountSameCriteria(List<Criteria> firstCriteriaList, List<Criteria> secondCriteriaList) {
