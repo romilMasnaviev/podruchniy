@@ -1,11 +1,13 @@
 package ru.xorochki.resSearch.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.xorochki.resSearch.dao.JpaUserRepository;
 import ru.xorochki.resSearch.dto.ReviewRequest;
 import ru.xorochki.resSearch.dto.ReviewResponse;
 import ru.xorochki.resSearch.model.Review;
@@ -17,20 +19,22 @@ import java.util.List;
 @Controller
 @RequestMapping("/reviews")
 @RequiredArgsConstructor
+@Slf4j
 public class ReviewController {
 
     private final ReviewService service;
     private final UserService userService;
+    private final JpaUserRepository userRepository;
 
     @GetMapping("/create")
     public String showReviewForm(@RequestParam("restaurantId") Long restaurantId, @AuthenticationPrincipal UserDetails userDetails, Model model) {
+        log.info("rest id {}", restaurantId);
         ReviewRequest reviewRequest = new ReviewRequest();
         reviewRequest.setRestaurantId(restaurantId);
         String userId = userDetails.getUsername();
         reviewRequest.setUsername(userId);
         reviewRequest.setUserId(userService.getUserIdByUsername(userId));
         model.addAttribute("reviewRequest", reviewRequest);
-        service.addCriteriaFromReviews(restaurantId,userDetails.getUsername());
         return "review_form";
     }
 
@@ -44,6 +48,7 @@ public class ReviewController {
 
         Review createdReview = service.create(reviewRequest);
         model.addAttribute("review", createdReview);
+        service.addCriteriaFromReviews(restaurantId,userRepository.getReferenceById(userId).getUsername());
         return "review_created";
     }
 

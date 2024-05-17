@@ -84,8 +84,6 @@ public class LoginController {
     @GetMapping("/search")
     public String search(@RequestParam(name = "query") String query, Model model) {
 
-
-
         List<RestaurantResponse> restaurants = restaurantService.getByStr(query);
         model.addAttribute("restaurants", restaurants);
         return "search-results";

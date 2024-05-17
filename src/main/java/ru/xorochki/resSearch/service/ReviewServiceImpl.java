@@ -17,6 +17,7 @@ import ru.xorochki.resSearch.model.Restaurant;
 import ru.xorochki.resSearch.model.Review;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -47,7 +48,7 @@ public class ReviewServiceImpl implements ReviewService {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new IllegalArgumentException("Ресторан с id " + restaurantId + " не найден"));
 
-        List<Review> reviews = reviewRepository.findAllByRestaurant_Id(restaurantId);
+        List<Review> reviews = reviewRepository.findAllByRestaurantId(restaurantId);
 
         int totalMarks = 0;
         int numberOfReviews = reviews.size();
@@ -94,20 +95,18 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     @Transactional
-    public void addCriteriaFromReviews(Long restaurantId,String username) {
-        // Получаем все отзывы для указанного ресторана
-        List<Review> reviews = reviewRepository.findAllByRestaurant_Id(restaurantId);
+    public void addCriteriaFromReviews(Long restaurantId, String username) {
+        List<Review> reviews = reviewRepository.findAllByRestaurantId(restaurantId);
         System.out.println("reviews");
         System.out.println(reviews);
 
-        // Создаем карту для подсчета количества повторений каждого слова в отзывах
         Map<String, Integer> wordCounts = new HashMap<>();
         for (Review review : reviews) {
             String[] words = review.getComment().split("\\s+");
             for (String word : words) {
-                // Игнорируем короткие слова, например, артикли или союзы
                 if (word.length() > 2) {
-                    wordCounts.put(word.toLowerCase(), wordCounts.getOrDefault(word.toLowerCase(), 0) + 1);
+                    word = word.toLowerCase().replaceAll("[^a-zA-Zа-яА-Я0-9]", "");
+                    wordCounts.put(word, wordCounts.getOrDefault(word, 0) + 1);
                 }
             }
         }
@@ -117,17 +116,23 @@ public class ReviewServiceImpl implements ReviewService {
         // Добавляем в критерии ресторана слова, которые встречаются чаще 3 раз
         Restaurant restaurant = restaurantRepository.findById(restaurantId).orElse(null);
         if (restaurant != null) {
-            List<Criteria> criteria = restaurant.getCriteria();
+            List<Criteria> existingCriteria = restaurant.getCriteria();
+            Set<String> existingCriteriaNames = existingCriteria.stream()
+                    .map(Criteria::getName)
+                    .collect(Collectors.toSet());
+
             for (Map.Entry<String, Integer> entry : wordCounts.entrySet()) {
-                if (entry.getValue() >= 3) {
+                if (entry.getValue() >= 3 && !existingCriteriaNames.contains(entry.getKey())) {
                     Criteria newCriteria = new Criteria();
                     newCriteria.setName(entry.getKey());
+                    restaurantRepository.getReferenceById(restaurantId);
                     criteriaRepository.save(newCriteria);
-                    criteria.add(new Criteria(entry.getKey()));
+                    existingCriteria.add(newCriteria);
                     System.out.println("SUCCESS");
                 }
             }
             restaurantRepository.save(restaurant);
         }
     }
+
 }

@@ -1,6 +1,7 @@
 package ru.xorochki.resSearch.service;
 
 import jakarta.validation.ValidationException;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.xorochki.resSearch.dao.JpaRestaurantRepository;
@@ -9,7 +10,6 @@ import ru.xorochki.resSearch.dto.RestaurantConverter;
 import ru.xorochki.resSearch.dto.RestaurantResponse;
 import ru.xorochki.resSearch.model.Criteria;
 import ru.xorochki.resSearch.model.Restaurant;
-import ru.xorochki.resSearch.model.Review;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,7 +20,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private final JpaRestaurantRepository repository;
     private final RestaurantConverter converter;
-    private final JpaReviewRepository reviewRepository;
 
     @Override
     public Restaurant create(Restaurant restaurant) {
@@ -121,10 +120,10 @@ public class RestaurantServiceImpl implements RestaurantService {
         List<RestaurantMatch> restaurantMatches = new ArrayList<>();
         for (Restaurant restaurant : restaurants) {
             int matchCount = 0;
-            for (Review review : reviewRepository.findAllByRestaurant_Id(restaurant.getId())) { //TODO
-                System.out.println("123123123" + reviewRepository.findAllByRestaurant_Id(restaurant.getId()));
+            List<Criteria> criteriaList = restaurant.getCriteria();
+            for (Criteria criteria1 : criteriaList) { //TODO
                 for (String word : criteria) {
-                    if (review.getComment().contains(word)) {
+                    if (criteria1.getName().toLowerCase().contains(word.toLowerCase())) {
                         matchCount++;
                     }
                 }
@@ -145,26 +144,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     private List<String> extractCriteria(String str) {
-        // Заглушка: разбиваем строку на слова и возвращаем как критерии поиска
         return Arrays.asList(str.split("\\s+"));
-    }
-
-    static class RestaurantMatch {
-        private Restaurant restaurant;
-        private int matchCount;
-
-        public RestaurantMatch(Restaurant restaurant, int matchCount) {
-            this.restaurant = restaurant;
-            this.matchCount = matchCount;
-        }
-
-        public Restaurant getRestaurant() {
-            return restaurant;
-        }
-
-        public int getMatchCount() {
-            return matchCount;
-        }
     }
 
     private Long getCountSameCriteria(List<Criteria> firstCriteriaList, List<Criteria> secondCriteriaList) {
@@ -173,5 +153,17 @@ public class RestaurantServiceImpl implements RestaurantService {
         Set<Criteria> intersection = new HashSet<>(firstCriteriaSet);
         intersection.retainAll(secondCriteriaSet);
         return (long) intersection.size();
+    }
+
+    @Getter
+    static class RestaurantMatch {
+        private final Restaurant restaurant;
+        private final int matchCount;
+
+        public RestaurantMatch(Restaurant restaurant, int matchCount) {
+            this.restaurant = restaurant;
+            this.matchCount = matchCount;
+        }
+
     }
 }
