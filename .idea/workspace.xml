@@ -6,24 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="bcd6052e-9942-4764-9e26-f0eb09cabd3e" name="Changes" comment="Добавлено изменение рейтинга ресторана исходя из отзывов на него">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/controller/ReviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/model/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/model/Restaurant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/model/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/model/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/RestaurantService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/RestaurantServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/RestaurantServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/ReviewService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/ReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/ReviewServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/ReviewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/controller/ReviewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/dto/RestaurantConverterImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/dto/RestaurantConverterImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/model/Restaurant.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/model/Restaurant.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/model/Review.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/model/Review.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/service/RestaurantServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/service/RestaurantServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/service/ReviewService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/service/ReviewService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/service/ReviewServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/service/ReviewServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/dao/JpaUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/dao/JpaUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/dto/LoginRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/dto/ReviewRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/dto/ReviewRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/CriteriaConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/CriteriaConverterImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/RestaurantConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/RestaurantConverterImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/ReviewConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/ReviewConverterImpl.java" afterDir="false" />
@@ -80,29 +65,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/romilmasnaviev/dev/podruchniy&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.web.browsers&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.ResSearchApplication.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/romilmasnaviev/dev/podruchniy",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.web.browsers",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="ru.xorochki.resSearch.securingweb" />
@@ -127,7 +113,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
       </set>
     </attachedChunks>
   </component>
@@ -144,6 +131,8 @@
       <workItem from="1715274106190" duration="30761000" />
       <workItem from="1716195403977" duration="1218000" />
       <workItem from="1716210306877" duration="663000" />
+      <workItem from="1716727288866" duration="174000" />
+      <workItem from="1716727496861" duration="3749000" />
     </task>
     <task id="LOCAL-00001" summary="add postman tests">
       <option name="closed" value="true" />

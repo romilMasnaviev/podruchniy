@@ -3,7 +3,7 @@ package ru.xorochki.resSearch.dto;
 import lombok.Data;
 
 @Data
-public class ReviewRequest {
+public class  ReviewRequest {
     private Long userId;
     private String username;
     private Long restaurantId;
