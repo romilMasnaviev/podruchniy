@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bcd6052e-9942-4764-9e26-f0eb09cabd3e" name="Changes" comment="Добавлено изменение рейтинга ресторана исходя из отзывов на него">
+    <list default="true" id="bcd6052e-9942-4764-9e26-f0eb09cabd3e" name="Changes" comment="удалены неиспользуемые файлы&#10;удален неиспользуемый метод">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/dao/JpaUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/dao/JpaUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/dto/LoginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/dto/ReviewRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/dto/ReviewRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/CriteriaConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/CriteriaConverterImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/RestaurantConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/RestaurantConverterImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/ReviewConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/ReviewConverterImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/UserConverterImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/ru/xorochki/resSearch/dto/UserConverterImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/dao/JpaUserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/dao/JpaUserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/dto/LoginRequest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +77,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/romilmasnaviev/dev/podruchniy",
+    "last_opened_file_path": "C:/Users/Anast/IdeaProjects/podruchniy",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -132,7 +130,8 @@
       <workItem from="1716195403977" duration="1218000" />
       <workItem from="1716210306877" duration="663000" />
       <workItem from="1716727288866" duration="174000" />
-      <workItem from="1716727496861" duration="3749000" />
+      <workItem from="1716727496861" duration="3906000" />
+      <workItem from="1716732174482" duration="1492000" />
     </task>
     <task id="LOCAL-00001" summary="add postman tests">
       <option name="closed" value="true" />
@@ -222,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715372776862</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="удалены неиспользуемые файлы&#10;удален неиспользуемый метод">
+      <option name="closed" value="true" />
+      <created>1716731874369</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1716731874369</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,6 +287,7 @@
     <MESSAGE value="Добавлены подборки" />
     <MESSAGE value="Сделано Добавление отзыва, Пока что не сделан анализ отзывов" />
     <MESSAGE value="Сделано Добавление в Избранное" />
-    <option name="LAST_COMMIT_MESSAGE" value="Сделано Добавление в Избранное" />
+    <MESSAGE value="удалены неиспользуемые файлы&#10;удален неиспользуемый метод" />
+    <option name="LAST_COMMIT_MESSAGE" value="удалены неиспользуемые файлы&#10;удален неиспользуемый метод" />
   </component>
 </project>
