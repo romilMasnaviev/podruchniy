@@ -2,7 +2,6 @@ package ru.xorochki.resSearch.service;
 
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.xorochki.resSearch.dao.JpaCriteriaRepository;
@@ -97,8 +96,6 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     public void addCriteriaFromReviews(Long restaurantId, String username) {
         List<Review> reviews = reviewRepository.findAllByRestaurantId(restaurantId);
-        System.out.println("reviews");
-        System.out.println(reviews);
 
         Map<String, Integer> wordCounts = new HashMap<>();
         for (Review review : reviews) {
@@ -110,10 +107,7 @@ public class ReviewServiceImpl implements ReviewService {
                 }
             }
         }
-        System.out.println("map");
-        System.out.println(wordCounts);
 
-        // Добавляем в критерии ресторана слова, которые встречаются чаще 3 раз
         Restaurant restaurant = restaurantRepository.findById(restaurantId).orElse(null);
         if (restaurant != null) {
             List<Criteria> existingCriteria = restaurant.getCriteria();
@@ -128,7 +122,6 @@ public class ReviewServiceImpl implements ReviewService {
                     restaurantRepository.getReferenceById(restaurantId);
                     criteriaRepository.save(newCriteria);
                     existingCriteria.add(newCriteria);
-                    System.out.println("SUCCESS");
                 }
             }
             restaurantRepository.save(restaurant);
