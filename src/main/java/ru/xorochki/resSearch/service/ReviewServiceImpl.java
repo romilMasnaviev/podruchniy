@@ -2,6 +2,12 @@ package ru.xorochki.resSearch.service;
 
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.ru.RussianAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.xorochki.resSearch.dao.JpaCriteriaRepository;
@@ -15,11 +21,14 @@ import ru.xorochki.resSearch.model.Criteria;
 import ru.xorochki.resSearch.model.Restaurant;
 import ru.xorochki.resSearch.model.Review;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ReviewServiceImpl implements ReviewService {
     private final JpaReviewRepository reviewRepository;
     private final JpaRestaurantRepository restaurantRepository;
@@ -92,21 +101,39 @@ public class ReviewServiceImpl implements ReviewService {
         return converter.reviewConvertToReviewResponse(reviewRepository.findByOwner_Id(userId));
     }
 
+
     @Override
     @Transactional
     public void addCriteriaFromReviews(Long restaurantId, String username) {
         List<Review> reviews = reviewRepository.findAllByRestaurantId(restaurantId);
 
         Map<String, Integer> wordCounts = new HashMap<>();
+        Map<String, String> lemmaToOriginalWord = new HashMap<>();
+        Analyzer analyzer = new RussianAnalyzer();
+
         for (Review review : reviews) {
-            String[] words = review.getComment().split("\\s+");
-            for (String word : words) {
-                if (word.length() > 2) {
-                    word = word.toLowerCase().replaceAll("[^a-zA-Zа-яА-Я0-9]", "");
-                    wordCounts.put(word, wordCounts.getOrDefault(word, 0) + 1);
+            try (TokenStream tokenStream = analyzer.tokenStream(null, new StringReader(review.getComment()))) {
+                CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+                tokenStream.reset();
+                String[] words = review.getComment().split("\\s+");
+                for (int i = 0; tokenStream.incrementToken() && i < words.length; i++) {
+                    String lemma = charTermAttribute.toString();
+                    String originalWord = words[i];
+                    if (lemma.length() > 2) {
+                        wordCounts.put(lemma, wordCounts.getOrDefault(lemma, 0) + 1);
+                        if (!lemmaToOriginalWord.containsKey(lemma) || originalWord.length() > lemmaToOriginalWord.get(lemma).length()) {
+                            lemmaToOriginalWord.put(lemma, originalWord);
+                        }
+                    }
                 }
+                tokenStream.end();
+            } catch (IOException e) {
+                throw new ValidationException("Error processing review comments", e);
             }
         }
+
+        log.info("wordCounts = {}", wordCounts);
+        log.info("lemmaToOriginalWord = {}", lemmaToOriginalWord);
 
         Restaurant restaurant = restaurantRepository.findById(restaurantId).orElse(null);
         if (restaurant != null) {
@@ -118,8 +145,8 @@ public class ReviewServiceImpl implements ReviewService {
             for (Map.Entry<String, Integer> entry : wordCounts.entrySet()) {
                 if (entry.getValue() >= 3 && !existingCriteriaNames.contains(entry.getKey())) {
                     Criteria newCriteria = new Criteria();
-                    newCriteria.setName(entry.getKey());
-                    restaurantRepository.getReferenceById(restaurantId);
+                    String originalWord = lemmaToOriginalWord.get(entry.getKey());
+                    newCriteria.setName(originalWord);
                     criteriaRepository.save(newCriteria);
                     existingCriteria.add(newCriteria);
                 }
