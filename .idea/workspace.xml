@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bcd6052e-9942-4764-9e26-f0eb09cabd3e" name="Changes" comment=".">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/ReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/xorochki/resSearch/service/ReviewServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/service/ReviewServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/xorochki/resSearch/service/ReviewServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/schema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +93,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources/templates" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
     <configuration name="ResSearchApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="resSearch" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="ru.xorochki.resSearch.ResSearchApplication" />
@@ -105,6 +101,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -129,6 +144,7 @@
       <workItem from="1716568253938" duration="939000" />
       <workItem from="1716801996627" duration="3107000" />
       <workItem from="1716805123996" duration="3068000" />
+      <workItem from="1716975523421" duration="618000" />
     </task>
     <task id="LOCAL-00001" summary="add postman tests">
       <option name="closed" value="true" />
@@ -218,7 +234,31 @@
       <option name="project" value="LOCAL" />
       <updated>1715372776862</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary=".">
+      <option name="closed" value="true" />
+      <created>1716928982595</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1716928982595</updated>
+    </task>
+    <task id="LOCAL-00013" summary=".">
+      <option name="closed" value="true" />
+      <created>1716929129080</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1716929129080</updated>
+    </task>
+    <task id="LOCAL-00014" summary=".">
+      <option name="closed" value="true" />
+      <created>1716929150721</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1716929150721</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
