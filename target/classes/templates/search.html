@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Критерии для поиска</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            color: #333333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 36pt;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        label {
+            font-size: 20pt;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            font-size: 20pt;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-btn {
+            font-size: 20pt;
+            display: block;
+            color: #007bff;
+            text-decoration: none;
+            padding: 13px;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<h1>Критерии для поиска</h1>
+<form action="/criteria/selected" method="get">
+    <ul>
+        <li th:each="criteria : ${criteriaList}">
+            <label>
+                <input name="selectedCriteria" th:value="${criteria.id}" type="checkbox"/>
+                <span th:text="${criteria.name}"></span>
+            </label>
+        </li>
+    </ul>
+    <div class="button-container">
+        <button type="submit">Поиск</button>
+    </div>
+</form>
+<a class="back-btn" href="/home">Вернуться на главную</a>
+</body>
+</html>
+
