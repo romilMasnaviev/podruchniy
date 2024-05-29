@@ -22,3 +22,4 @@ services:
       - POSTGRES_DB=ressearch
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
+    command: [ "postgres", "-c", "max_connections=300" ]
