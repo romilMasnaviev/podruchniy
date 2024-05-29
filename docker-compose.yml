@@ -6,15 +6,16 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/ressearch
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - DB_HOST= postgres
     depends_on:
       - postgres
     entrypoint: ["java", "-jar", "/app.jar"]
 
   postgres:
-    image: postgres
+    image: postgres:16.2-alpine
+    container_name: postgres
     ports:
       - "5433:5432"
     environment:
