@@ -11,6 +11,7 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
     depends_on:
       - postgres
+    entrypoint: ["java", "-jar", "/app.jar"]
 
   postgres:
     image: postgres
