@@ -6,7 +6,7 @@ import ru.xorochki.resSearch.model.Criteria;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-29T13:36:10+0300",
+    date = "2024-05-29T22:10:07+0300",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
 )
 @Component
